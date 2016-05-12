@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="peerdelivers.peerdelivery"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="peerdelivers.peerdelivery.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.PreStart"
+            android:label="@string/title_activity_pre_start" >
+        </activity>
+
+        <receiver android:name="peerdelivers.peerdelivery.IncomingSms" >
+            <intent-filter android:priority="999" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="peerdelivers.peerdelivery.SearchForPeer"
+            android:label="@string/title_activity_search_for_peer" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.about"
+            android:label="@string/title_activity_about" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.preMain"
+            android:label="@string/title_activity_pre_main" >
+        </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="peerdelivers.peerdelivery.FacebookLogin"
+            android:label="@string/title_activity_facebook_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

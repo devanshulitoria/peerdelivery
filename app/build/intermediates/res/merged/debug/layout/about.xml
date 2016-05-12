@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developed By"
+
+        android:id="@+id/textView"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffffff"
+        android:elegantTextHeight="true"
+        android:textSize="20sp"
+        android:backgroundTint="@color/abc_primary_text_material_light" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Devanshu Litoria"
+
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="devanshu.litoria@gmail.com"
+        android:textStyle="italic"
+        android:autoLink = "email"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffffff" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Himanshu Mishra"
+
+
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="coolguymishra@gmail.com"
+        android:autoLink = "email"
+        android:textStyle="italic"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffffff" />
+</LinearLayout>
+<!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/layout/about.xml -->

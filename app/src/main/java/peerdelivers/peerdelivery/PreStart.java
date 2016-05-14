@@ -65,7 +65,7 @@ public class PreStart extends AppCompatActivity {
         setContentView(R.layout.activity_pre_start);
 
 
-        inst = this;
+
         sendBtn = (Button) findViewById(R.id.btnSendSMS);
         txtphoneNo = (EditText) findViewById(R.id.editText);
         sharedpreferences = getSharedPreferences(user_id, Context.MODE_PRIVATE);

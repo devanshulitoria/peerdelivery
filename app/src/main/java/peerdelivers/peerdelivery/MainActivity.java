@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -36,12 +37,15 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 public class MainActivity extends AppCompatActivity {
     String sms="";
     Filtering ft;
-    Button button;
+    Button button,notify;
     TextView view;
+    NotifyManager nm;
     public static final String user_id = "user_id" ;
     SharedPreferences sharedpreferences;
     static String message = PreStart.phoneNo;
     static String secretCode=PreStart.uuid;
+    HashMap<String,String> notifydata=new HashMap<String,String>();
+    Context ct;
 
 
     @Override
@@ -49,10 +53,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ft=new Filtering();
-
+        ct=getApplication();
 
 
         button = (Button) findViewById(R.id.b_next);
+        notify=(Button)findViewById(R.id.notify);
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -64,6 +69,21 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        notify.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                notifydata.put("title","This is a sample title");
+                notifydata.put("content","this is a sample content");
+            nm=new NotifyManager(ct);
+                nm.notifying(notifydata);
+
+
+            }
+
+        });
+
         Bundle bundle = getIntent().getExtras();
        // static String message = PreStart;//bundle.getString("user_id");
         sharedpreferences = getSharedPreferences(user_id, Context.MODE_PRIVATE);

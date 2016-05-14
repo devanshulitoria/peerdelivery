@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:2:1-60:12
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:2:1-62:12
 	package
 		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:3:5-40
 		INJECTED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml
@@ -30,7 +30,7 @@ ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\Android
 	android:name
 		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:8:22-64
 application
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:10:5-58:19
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:10:5-60:19
 MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.1] C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v13:23.1.1] C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.1.1\AndroidManifest.xml:22:5-20
@@ -62,67 +62,67 @@ ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\Android
 	android:name
 		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:17:13-41
 activity#peerdelivers.peerdelivery.PreStart
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:20:9-24:20
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:20:9-29:20
 	android:label
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:22:13-61
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:22:13-45
 	android:name
 		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:21:13-37
-receiver#peerdelivers.peerdelivery.IncomingSms
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:26:9-30:20
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:26:19-46
-intent-filter#android.provider.Telephony.SMS_RECEIVED
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:27:13-29:29
-	android:priority
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:27:28-50
-action#android.provider.Telephony.SMS_RECEIVED
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:28:17-82
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:28:25-79
-activity#peerdelivers.peerdelivery.SearchForPeer
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:32:9-35:20
-	android:label
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:34:13-67
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:33:13-42
-activity#peerdelivers.peerdelivery.about
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:36:9-39:20
-	android:label
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:38:13-57
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:37:13-34
-activity#peerdelivers.peerdelivery.preMain
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:40:9-43:20
-	android:label
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:42:13-60
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:41:13-36
-activity#com.facebook.FacebookActivity
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:44:9-48:48
-	android:label
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:48:13-45
-	android:configChanges
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:45:13-114
-	android:theme
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:47:13-72
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:44:19-63
-activity#peerdelivers.peerdelivery.FacebookLogin
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:49:9-57:20
-	android:label
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:51:13-66
-	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:50:13-42
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:52:13-56:29
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:23:13-27:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:53:17-69
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:24:17-69
 	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:53:25-66
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:24:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:55:17-77
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:55:27-74
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:26:27-74
+receiver#peerdelivers.peerdelivery.IncomingSms
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:31:9-35:20
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:31:19-46
+intent-filter#android.provider.Telephony.SMS_RECEIVED
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:32:13-34:29
+	android:priority
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:32:28-50
+action#android.provider.Telephony.SMS_RECEIVED
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:33:17-82
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:33:25-79
+activity#peerdelivers.peerdelivery.SearchForPeer
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:37:9-40:20
+	android:label
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:39:13-67
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:38:13-42
+activity#peerdelivers.peerdelivery.about
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:41:9-44:20
+	android:label
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:43:13-57
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:42:13-34
+activity#peerdelivers.peerdelivery.preMain
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:45:9-49:20
+	android:label
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:47:13-60
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:46:13-36
+activity#com.facebook.FacebookActivity
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:50:9-54:48
+	android:label
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:54:13-45
+	android:configChanges
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:51:13-114
+	android:theme
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:53:13-72
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:50:19-63
+activity#peerdelivers.peerdelivery.FacebookLogin
+ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:55:9-59:20
+	android:label
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:57:13-66
+	android:name
+		ADDED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml:56:13-42
 uses-sdk
 INJECTED from C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\AndroidManifest.xml:20:5-43

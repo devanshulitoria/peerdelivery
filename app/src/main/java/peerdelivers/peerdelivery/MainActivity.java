@@ -41,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
     TextView view;
     NotifyManager nm;
     public static final String user_id = "user_id" ;
-    SharedPreferences sharedpreferences;
+    SharedPreferences sharedpreferences,smsSharedPreferences;
     static String message = PreStart.phoneNo;
     static String secretCode=PreStart.uuid;
     HashMap<String,String> notifydata=new HashMap<String,String>();
     Context ct;
+    long msG_ID;
 
 
     @Override
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
        // static String message = PreStart;//bundle.getString("user_id");
+        //optimizing sms reading...not reading a sms which is already read.
+        smsSharedPreferences= getSharedPreferences("last_read_msg_id", Context.MODE_PRIVATE);
+        msG_ID=smsSharedPreferences.getLong("last_msg_id", 0);
         sharedpreferences = getSharedPreferences(user_id, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if(message!=null) {
@@ -104,15 +108,13 @@ public class MainActivity extends AppCompatActivity {
 
         view=(TextView)findViewById(R.id.devanshu);
         view.setMovementMethod(new ScrollingMovementMethod());
-        view.setText("this is sparta");
         getSMS();
 
     }
     public void getSMS(){
-        String progess=null;
         Uri uriSMSURI = Uri.parse("content://sms/inbox");
         Cursor cur = getContentResolver().query(uriSMSURI, new String[]{"_id", "address", "date", "body"}, null, null, null);
-        int total=cur.getCount();
+        long total=cur.getCount();
         int i=0;
 
 
@@ -122,31 +124,44 @@ public class MainActivity extends AppCompatActivity {
         String body;
         JSONObject jso = new JSONObject();
         JSONArray jsa = new JSONArray();
+        Long lastsmsId= Long.valueOf(0);
+        int j=0;
+        Log.e("last read id:",String.valueOf(msG_ID));
         while (cur.moveToNext()) {
-
+            if((i++)==0) {
+                lastsmsId=Long.parseLong(cur.getString(0));
+            }
             temp = cur.getString(1);
             body = cur.getString(3);
             Log.e(temp, "value");
-            if (body.contains("PNR")) {
-                type = ft.filter(temp);
-                Log.e(type, "type of transport");
-                if (type.equalsIgnoreCase("train") || type.equalsIgnoreCase("FLIGHT")) {
-                    try {
-                        jso.put("TYPE", type);
-                        jso.put("BODY", cur.getString(3));
-                        jso.put("DATE", cur.getString(2));
-                        jsa.put(m++,jso);
-                        //sms += "Type:" + type + " Body:" + cur.getString(3) + " Date:" + cur.getString(2) + "\n";
-                        //sms += "--------------------------------------------------------------------------\n";
+            Log.e("_id",cur.getString(0));
+            if (Long.parseLong(cur.getString(0)) > msG_ID){
+                if (body.contains("PNR")) {
+                    type = ft.filter(temp);
+                    Log.e(type, "type of transport");
+                    if (type.equalsIgnoreCase("train") || type.equalsIgnoreCase("FLIGHT")) {
+                        try {
+                            jso.put("TYPE", type);
+                            jso.put("BODY", cur.getString(3));
+                            jso.put("DATE", cur.getString(2));
+                            jsa.put(m++, jso);
+                            //sms += "Type:" + type + " Body:" + cur.getString(3) + " Date:" + cur.getString(2) + "\n";
+                            //sms += "--------------------------------------------------------------------------\n";
 
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
         }
-        view.setText("Welcome back " + sms + "\n" + jsa.toString());
+            //lastsmsId=Long.parseLong(cur.getString(0));
+        }
+        SharedPreferences.Editor editor = smsSharedPreferences.edit();
+        editor.putLong("last_msg_id",lastsmsId );
+        editor.commit();
+
+        view.setText("Welcome back " + sms + "/n" + jsa.toString());
         Log.e(jsa.toString(), "JSON");
 
     }

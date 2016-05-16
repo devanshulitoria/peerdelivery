@@ -1,14 +1,15 @@
 package peerdelivers.peerdelivery;
 
-
 import android.content.Context;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -16,7 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +34,8 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -47,12 +53,37 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String,String> notifydata=new HashMap<String,String>();
     Context ct;
     long msG_ID;
+   ListView mDrawerList;
+    ListView tListView;
+    private CustomAdapter travelList;
+    private DrawerLayout mDrawerLayout;
+    private ArrayAdapter<String> mAdapter;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private String mActivityTitle;
+    List<HashMap<String,String>> hm;
+
+    String[] testArry={"devanshu","siddharth","aditya","himanshu","tatti","pheshab","cannada","India","Chutiya","Randi ka baccha"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+       view=(TextView)findViewById(R.id.devanshu);
+//        view.setMovementMethod(new ScrollingMovementMethod());
+        tListView= (ListView)findViewById(R.id.travelList);
+
+        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mActivityTitle = getTitle().toString();
+        addDrawerItems();
+        setupDrawer();
+
+        ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this,
+                R.layout.listview_layout,R.id.listTextView, testArry);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         ft=new Filtering();
         ct=getApplication();
 
@@ -106,15 +137,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        view=(TextView)findViewById(R.id.devanshu);
-        view.setMovementMethod(new ScrollingMovementMethod());
+
         getSMS();
 
     }
     public void getSMS(){
         Uri uriSMSURI = Uri.parse("content://sms/inbox");
         Cursor cur = getContentResolver().query(uriSMSURI, new String[]{"_id", "address", "date", "body"}, null, null, null);
-        long total=cur.getCount();
+       // long total=cur.getCount();
         int i=0;
 
 
@@ -127,9 +157,11 @@ public class MainActivity extends AppCompatActivity {
         Long lastsmsId= Long.valueOf(0);
         int j=0;
         Log.e("last read id:",String.valueOf(msG_ID));
+        hm= new LinkedList<HashMap<String, String>>();
         while (cur.moveToNext()) {
             if((i++)==0) {
-                lastsmsId=Long.parseLong(cur.getString(0));
+                //to be uncommented during production
+               // lastsmsId=Long.parseLong(cur.getString(0));
             }
             temp = cur.getString(1);
             body = cur.getString(3);
@@ -141,30 +173,96 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(type, "type of transport");
                     if (type.equalsIgnoreCase("train") || type.equalsIgnoreCase("FLIGHT")) {
                         try {
+                            HashMap<String,String> tDetail=new HashMap<String,String>();
                             jso.put("TYPE", type);
                             jso.put("BODY", cur.getString(3));
                             jso.put("DATE", cur.getString(2));
+
                             jsa.put(m++, jso);
+                            tDetail.put("type",type);
+                            tDetail.put("content", cur.getString(3));
+                            if(cur.getString(3).contains("DEVANSHU"))
+                            tDetail.put("status","N");
+                            else
+                                tDetail.put("status","A");
                             //sms += "Type:" + type + " Body:" + cur.getString(3) + " Date:" + cur.getString(2) + "\n";
                             //sms += "--------------------------------------------------------------------------\n";
+                            hm.add(tDetail);
 
                         } catch (JSONException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
+
                     }
+
                 }
+
         }
             //lastsmsId=Long.parseLong(cur.getString(0));
         }
         SharedPreferences.Editor editor = smsSharedPreferences.edit();
-        editor.putLong("last_msg_id",lastsmsId );
+        editor.putLong("last_msg_id", lastsmsId);
         editor.commit();
 
-        view.setText("Welcome back " + sms + "/n" + jsa.toString());
+       view.setText("Welcome back " + sms);
         Log.e(jsa.toString(), "JSON");
+        travelList=new CustomAdapter(this,hm);
+        travelList.setListView(tListView);
+        tListView.setAdapter(travelList);
 
     }
+
+    private void addDrawerItems() {
+        String[] osArray = { "Home", "Notification", "History", "Sent Items", "Received Items","Settings" };
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle("Navigation!");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mActivityTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -189,7 +287,12 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        // Activate the navigation drawer toggle
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
 
 }

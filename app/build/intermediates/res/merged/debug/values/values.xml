@@ -295,6 +295,8 @@
     <string name="com_facebook_tooltip_default">New! You\'re in control - choose what info you want to share with apps.</string>
     <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_open">Open navigation drawer</string>
     <string name="facebook_app_id">1088228601233560</string>
     <string name="hello_world">Hello world!</string>
     <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.11.0/res/values/values.xml -->

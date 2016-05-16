@@ -31,7 +31,7 @@ public class NotifyManager{
         // Large icon appears on the left of the notification
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setTicker("this is ticker text");
-        builder.setContentTitle("REX Alert Notification");
+        builder.setContentTitle("New Request");
         builder.setContentText("You have a new message");
         //adding LED lights to notification
         builder.setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND | Notification.FLAG_SHOW_LIGHTS);
@@ -40,7 +40,7 @@ public class NotifyManager{
         builder.setAutoCancel(true);
 
 
-        builder.setOngoing(true);
+        builder.setOngoing(false);
         builder.build();
         Intent notificationIntent = new Intent(mContext, about.class);
         PendingIntent pending = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);

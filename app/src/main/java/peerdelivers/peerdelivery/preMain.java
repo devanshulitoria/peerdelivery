@@ -34,6 +34,7 @@ public class preMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_main);
+        CheckConnection.isConnected(getApplicationContext(), preMain.this);
         instPreMain = this;
         go = (Button) findViewById(R.id.btnSendEmail);
         email = (EditText) findViewById(R.id.EditEmail);

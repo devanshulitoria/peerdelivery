@@ -2,6 +2,8 @@ package peerdelivers.peerdelivery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,8 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -19,6 +23,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -26,11 +31,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
 public class FacebookLogin extends AppCompatActivity {
     LoginButton loginButton;
     CallbackManager callbackManager;
     String tempdata="kela kela";
     TextView tv;
+    Typeface custom_font;
+    AccessTokenTracker accessTokenTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +47,32 @@ public class FacebookLogin extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager=CallbackManager.Factory.create();
         setContentView(R.layout.activity_facebook_login);
+        CheckConnection.isConnected(getApplicationContext(), FacebookLogin.this);
+         accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken newAccessToken) {
+                updateWithToken(newAccessToken);
+            }
+        };
+        if(AccessToken.getCurrentAccessToken()!=null){
+            Intent i = new Intent(FacebookLogin.this, MainActivity.class);
+            startActivity(i);
+
+            finish();
+
+        }
+        LoginManager.getInstance().logInWithReadPermissions(
+                this,
+                Arrays.asList("email", "user_birthday", "user_work_history", "user_friends"));
         tv=(TextView)findViewById(R.id.fbText);
-        //tv.setText(tempdata);
+        custom_font = Typeface.createFromAsset(getAssets(), "fonts/myriad-set-pro_thin.ttf");
+        tv.setTypeface(custom_font);
         Log.e("start", "facebook devanshu");
         AppEventsLogger.newLogger(this);
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions("public_profile");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -52,49 +80,53 @@ public class FacebookLogin extends AppCompatActivity {
                 // App code
                 Log.e("facebook 1","devanshu");
                 String str=loginResult.getAccessToken().getToken();
-                tv.setText(str);
-                new GraphRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        "/me/friends",
-                        null,
-                        HttpMethod.GET,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
-            /* handle the result */
-                                Log.e("facebook",response.toString());
-                                JSONObject obj=response.getJSONObject();
-                                JSONArray jsonArray = obj.optJSONArray("data");
-                                for(int i=0; i < jsonArray.length(); i++){
-                                    JSONObject jsonObject = null;
-                                    try {
-                                        jsonObject = jsonArray.getJSONObject(i);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    String id = jsonObject.optString("id").toString();
-                                    String name = jsonObject.optString("name").toString();
-
-
-                                    tempdata += "Node"+i+" : \n id= "+ id +" \n Name= "+ name +  "\n ";
-                                }
-                                tv.setText(tempdata);
-                            }
-                        }
-                ).executeAsync();
+                Log.e("Facebook token",str);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+//                new GraphRequest(
+//                        AccessToken.getCurrentAccessToken(),
+//                        "/me",
+//                        null,
+//                        HttpMethod.GET,
+//                        new GraphRequest.Callback() {
+//                            public void onCompleted(GraphResponse response) {
+//            /* handle the result */
+//                                Log.e("facebook",response.toString());
+//                                JSONObject obj=response.getJSONObject();
+//                                JSONArray jsonArray = obj.optJSONArray("data");
+//                                for(int i=0; i < jsonArray.length(); i++){
+//                                    JSONObject jsonObject = null;
+//                                    try {
+//                                        jsonObject = jsonArray.getJSONObject(i);
+//                                    } catch (JSONException e) {
+//                                        e.printStackTrace();
+//                                    }
+//
+//                                    String id = jsonObject.optString("id").toString();
+//                                    String name = jsonObject.optString("name").toString();
+//
+//
+//                                    tempdata += "Node"+i+" : \n id= "+ id +" \n Name= "+ name +  "\n ";
+//                                }
+//                                tv.setText(tempdata);
+//                            }
+//                        }
+//                ).executeAsync();
 
             }
 
             @Override
             public void onCancel() {
                 // App code
-                Log.e("facebook exception","cancel method");
+                Toast.makeText(getBaseContext(),"Huh! Why would you cancel",
+                        Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
                 // App code
-                Log.e("facebook exception",exception.toString());
+                Toast.makeText(getBaseContext(),"Shit Login Failed!"+exception.toString(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -109,7 +141,32 @@ public class FacebookLogin extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_facebook_login, menu);
         return true;
     }
+    private void updateWithToken(AccessToken currentAccessToken) {
 
+        if (currentAccessToken != null) {
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    Intent i = new Intent(FacebookLogin.this, MainActivity.class);
+                    startActivity(i);
+
+                    finish();
+                }
+            }, 100000);
+        } else {
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    Intent i = new Intent(FacebookLogin.this, PreStart.class);
+                    startActivity(i);
+
+                    finish();
+                }
+            }, 100000);
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -123,5 +180,10 @@ public class FacebookLogin extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        accessTokenTracker.stopTracking();
     }
 }

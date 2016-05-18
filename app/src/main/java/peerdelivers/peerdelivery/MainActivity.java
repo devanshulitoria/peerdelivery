@@ -1,5 +1,7 @@
 package peerdelivers.peerdelivery;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 
 import android.content.Intent;
@@ -14,7 +16,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +51,7 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 public class MainActivity extends AppCompatActivity {
     String sms="";
     Filtering ft;
+    SpannableString s;
     Button button,notify;
     TextView view;
     TextView mCounter;
@@ -75,81 +81,80 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-       view=(TextView)findViewById(R.id.devanshu);
-        view.setMovementMethod(new ScrollingMovementMethod());
-        tListView= (ListView)findViewById(R.id.travelList);
-
-        mDrawerList = (ListView)findViewById(R.id.navList);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mActivityTitle = getTitle().toString();
-        custom_font = Typeface.createFromAsset(getAssets(), "fonts/myriad-set-pro_thin.ttf");
-        view.setTypeface(custom_font);
-
-        addDrawerItems();
-        setupDrawer();
-
-        ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this,
-                R.layout.listview_layout,R.id.listTextView, testArry);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        ft=new Filtering();
         ct=getApplication();
 
+        CheckConnection.isConnected(getApplicationContext(), MainActivity.this);
+            view = (TextView) findViewById(R.id.devanshu);
+            view.setMovementMethod(new ScrollingMovementMethod());
+            tListView = (ListView) findViewById(R.id.travelList);
 
-        button = (Button) findViewById(R.id.b_next);
-        notify=(Button)findViewById(R.id.notify);
-        button.setOnClickListener(new View.OnClickListener() {
+            mDrawerList = (ListView) findViewById(R.id.navList);
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mActivityTitle = getTitle().toString();
+            custom_font = Typeface.createFromAsset(getAssets(), "fonts/myriad-set-pro_thin.ttf");
+            view.setTypeface(custom_font);
 
-            @Override
-            public void onClick(View arg0) {
+            addDrawerItems();
+            setupDrawer();
 
-                Intent goToNextActivity = new Intent(getApplicationContext(), SearchForPeer.class);
-                startActivity(goToNextActivity);
+            ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this,
+                    R.layout.listview_layout, R.id.listTextView, testArry);
 
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            ft = new Filtering();
+
+
+            button = (Button) findViewById(R.id.b_next);
+            notify = (Button) findViewById(R.id.notify);
+            button.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+
+                    Intent goToNextActivity = new Intent(getApplicationContext(), SearchForPeer.class);
+                    startActivity(goToNextActivity);
+
+                }
+
+            });
+
+            notify.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    notifydata.put("title", "This is a sample title");
+                    notifydata.put("content", "this is a sample content");
+                    nm = new NotifyManager(ct);
+                    nm.notifying(notifydata);
+                    //mCounter.setText(String.valueOf(counterValue++));
+
+
+                }
+
+            });
+
+            Bundle bundle = getIntent().getExtras();
+            // static String message = PreStart;//bundle.getString("user_id");
+            //optimizing sms reading...not reading a sms which is already read.
+            smsSharedPreferences = getSharedPreferences("last_read_msg_id", Context.MODE_PRIVATE);
+            msG_ID = smsSharedPreferences.getLong("last_msg_id", 0);
+            sharedpreferences = getSharedPreferences(user_id, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            if (message != null) {
+                editor.putLong("user_id", Long.parseLong(message.substring(3)));
+                editor.putLong("auth_code", Long.parseLong(secretCode));
+                editor.commit();
+                sms = message;
+                Log.e("devanshu main", message);
+                PreStart.instance().finish();
+                preMain.instance().finish();
+            } else {
+                sms = String.valueOf(sharedpreferences.getLong("user_id", 0));
             }
 
-        });
 
-        notify.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                notifydata.put("title","This is a sample title");
-                notifydata.put("content","this is a sample content");
-            nm=new NotifyManager(ct);
-                nm.notifying(notifydata);
-                //mCounter.setText(String.valueOf(counterValue++));
-
-
-            }
-
-        });
-
-        Bundle bundle = getIntent().getExtras();
-       // static String message = PreStart;//bundle.getString("user_id");
-        //optimizing sms reading...not reading a sms which is already read.
-        smsSharedPreferences= getSharedPreferences("last_read_msg_id", Context.MODE_PRIVATE);
-        msG_ID=smsSharedPreferences.getLong("last_msg_id", 0);
-        sharedpreferences = getSharedPreferences(user_id, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        if(message!=null) {
-            editor.putLong("user_id", Long.parseLong(message.substring(3)));
-            editor.putLong("auth_code", Long.parseLong(secretCode));
-            editor.commit();
-            sms=message;
-            Log.e("devanshu main", message);
-            PreStart.instance().finish();
-            preMain.instance().finish();
-        }
-        else{
-            sms=String.valueOf(sharedpreferences.getLong("user_id",0));
-        }
-
-
-
-        getSMS();
+            getSMS();
 
     }
     public void getSMS(){

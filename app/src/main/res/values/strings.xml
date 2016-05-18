@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">PeerDelivery</string>
-
+    <string name="app_name">Peer Delivery</string>
     <string name="hello_world">Hello world!</string>
     <string name="mishra">Mishra ki maa ki chuut!</string>
     <string name="action_settings">Settings</string>

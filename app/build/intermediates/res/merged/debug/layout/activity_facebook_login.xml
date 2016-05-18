@@ -4,19 +4,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="peerdelivers.peerdelivery.FacebookLogin">
+    tools:context="peerdelivers.peerdelivery.FacebookLogin"
+    android:background="@drawable/background">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <TextView android:text="Last step....We promise !" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/fbText"
-        />
+        android:layout_above="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
 <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/layout/activity_facebook_login.xml -->

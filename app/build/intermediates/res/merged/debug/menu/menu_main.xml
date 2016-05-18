@@ -3,5 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/about" android:title="@string/about"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/badge"
+        android:title="Badges"
+        android:actionLayout="@layout/notificationlayout"
+        app:showAsAction="always" />
 </menu>
 <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/menu/menu_main.xml -->

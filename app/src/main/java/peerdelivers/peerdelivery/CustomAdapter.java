@@ -1,6 +1,7 @@
 package peerdelivers.peerdelivery;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,11 +26,13 @@ public class CustomAdapter extends ArrayAdapter<HashMap<String,String>> {
     private final List<HashMap<String,String>> smsList;
     private float density = 2f;
     private ListView listView;
+    Typeface custom_font;
 
     public CustomAdapter(Context context, List<HashMap<String,String>> objects) {
         super(context, R.layout.listview_layout, objects);
         this.context = context;
         this.smsList = objects;
+
     }
 
 
@@ -39,9 +42,11 @@ public class CustomAdapter extends ArrayAdapter<HashMap<String,String>> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.listview_layout, parent, false);
+        custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/myriad-set-pro_thin.ttf");
         TextView textView = (TextView) rowView.findViewById(R.id.listTextView);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         textView.setText(smsList.get(position).get("content").toString());
+        textView.setTypeface(custom_font);
         // Change the icon for Windows and iPhone
         String s = smsList.get(position).get("type").toString();
         if (s.equalsIgnoreCase("train")) {

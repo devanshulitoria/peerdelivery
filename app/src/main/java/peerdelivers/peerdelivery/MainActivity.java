@@ -7,7 +7,9 @@ import android.content.SharedPreferences;
 
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     Filtering ft;
     Button button,notify;
     TextView view;
+    TextView mCounter;
     NotifyManager nm;
     public static final String user_id = "user_id" ;
     SharedPreferences sharedpreferences,smsSharedPreferences;
@@ -61,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     List<HashMap<String,String>> hm;
+    Typeface custom_font;
+     int counterValue=0;
 
     String[] testArry={"devanshu","siddharth","aditya","himanshu","tatti","pheshab","cannada","India","Chutiya","Randi ka baccha"};
 
@@ -69,13 +75,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
        view=(TextView)findViewById(R.id.devanshu);
-//        view.setMovementMethod(new ScrollingMovementMethod());
+        view.setMovementMethod(new ScrollingMovementMethod());
         tListView= (ListView)findViewById(R.id.travelList);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
+        custom_font = Typeface.createFromAsset(getAssets(), "fonts/myriad-set-pro_thin.ttf");
+        view.setTypeface(custom_font);
+
         addDrawerItems();
         setupDrawer();
 
@@ -110,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 notifydata.put("content","this is a sample content");
             nm=new NotifyManager(ct);
                 nm.notifying(notifydata);
+                //mCounter.setText(String.valueOf(counterValue++));
 
 
             }
@@ -267,7 +278,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        //super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.badge);
+        MenuItemCompat.setActionView(item, R.layout.notificationlayout);
+        RelativeLayout notifCount = (RelativeLayout) MenuItemCompat.getActionView(item);
+
+        final TextView tv = (TextView) notifCount.findViewById(R.id.tvcounter);
+        Button bt=(Button)notifCount.findViewById(R.id.bt_noti);
+        bt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                //item.setIcon(R.drawable.notification);
+                startActivity(new Intent(getApplicationContext(), about.class));
+                tv.setText("");
+                tv.setVisibility(View.INVISIBLE);
+
+            }
+
+        });
+        tv.setText("12");
         return true;
     }
 
@@ -277,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Log.e("Menu ID:",String.valueOf(id));
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
 
@@ -290,6 +323,12 @@ public class MainActivity extends AppCompatActivity {
         // Activate the navigation drawer toggle
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
+        }
+
+        if(id==R.id.badge)
+        {
+
+
         }
         return super.onOptionsItemSelected(item);
     }

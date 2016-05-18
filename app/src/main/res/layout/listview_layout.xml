@@ -76,7 +76,7 @@
             android:id="@+id/listTextdoj"
             android:typeface="sans"
             android:textSize="8sp"
-            android:layout_gravity="left|bottom"
+
             android:textColor="#4c22ff"
             android:textAppearance="@android:color/holo_blue_light" />
 

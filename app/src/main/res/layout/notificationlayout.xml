@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="48dp"
+    android:layout_height="fill_parent"
+    android:layout_gravity="right"
+    android:gravity="center_vertical">
+
+    <Button
+        android:id="@+id/bt_noti"
+        android:layout_width="35dip"
+        android:layout_height="35dip"
+        android:background="@drawable/notification"
+        android:gravity="center"
+        android:padding="2dp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:id="@+id/tvcounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shape_notification"
+        android:padding="8dp"
+        android:text=""
+        android:textSize="10sp"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

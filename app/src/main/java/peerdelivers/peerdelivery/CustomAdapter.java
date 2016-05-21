@@ -47,7 +47,7 @@ public class CustomAdapter extends ArrayAdapter<HashMap<String,String>> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         textView.setText(smsList.get(position).get("content").toString());
         textView.setTypeface(custom_font);
-        // Change the icon for Windows and iPhone
+
         String s = smsList.get(position).get("type").toString();
         if (s.equalsIgnoreCase("train")) {
             imageView.setImageResource(train);

@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.loopj.android.http.*;
@@ -34,12 +36,13 @@ import cz.msebera.android.httpclient.protocol.HttpContext;
  */
 public class SearchForPeer extends AppCompatActivity {
     Button Search;
+        private RadioGroup itemRadioGroup;
+        private RadioButton itemRadioButton;
     private static final String LOG_TAG = "PostSample";
     String[] cities={
             "North and Middle Andaman" ,
             "South Andaman" ,
             "Nicobar" ,
-            
             "Adilabad" ,
             "Anantapur" ,
             "Chittoor" ,
@@ -738,6 +741,7 @@ public class SearchForPeer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+       itemRadioGroup = (RadioGroup) findViewById(R.id.radioGroupitems);
         source=(AutoCompleteTextView)findViewById(R.id.autoCompleteSource);
         destination=(AutoCompleteTextView)findViewById(R.id.autocompleteDest);
         Search=(Button)findViewById(R.id.b_searchPeer);
@@ -777,8 +781,9 @@ public class SearchForPeer extends AppCompatActivity {
         Search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
-                Toast.makeText(getBaseContext(),sourceText+","+DestText ,
+                int selectedId = itemRadioGroup.getCheckedRadioButtonId();
+                itemRadioButton = (RadioButton) findViewById(selectedId);
+                Toast.makeText(getBaseContext(),itemRadioButton.getTag()+","+DestText ,
                         Toast.LENGTH_LONG).show();
                 sendPOSTRequest("devanshu");
 

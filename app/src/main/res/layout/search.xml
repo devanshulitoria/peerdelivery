@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@drawable/background">
 
@@ -23,19 +23,90 @@
         android:textColor="#ffffff"
         android:layout_marginTop="25dip"
         android:gravity="center"/>
-
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search peers"
+        android:text="Your Item is:"
+        android:textColor="@android:color/white"
+        android:layout_margin="5dp"
+        android:textSize="15sp"/>
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+
+        <RadioGroup
+            android:id="@+id/radioGroupitems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            >
+
+            <RadioButton
+                android:id="@+id/radioBooks"
+
+                android:tag="books"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/booksxml"
+                android:layout_marginRight="10dp"
+                android:button="@android:color/transparent"/>
+
+            <RadioButton
+                android:id="@+id/radioClothes"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:tag="clothes"
+
+                android:layout_marginRight="10dp"
+                android:background="@drawable/clothesxml"
+                android:padding="5dp"
+                android:button="@android:color/transparent"/>
+            <RadioButton
+                android:id="@+id/radioElectronics"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="10dp"
+                android:tag="electronics"
+                android:background="@drawable/electronicsxml"
+                android:button="@android:color/transparent"/>
+            <RadioButton
+                android:id="@+id/radioMedicine"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="10dp"
+                android:tag="medicines"
+                android:background="@drawable/medicinesxml"
+                android:button="@android:color/transparent"/>
+            <RadioButton
+                android:id="@+id/radioHousehold"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginRight="10dp"
+                android:tag="household"
+                android:background="@drawable/householdxml"
+                android:button="@android:color/transparent"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/planesend"
         android:id="@+id/b_searchPeer"
         android:layout_gravity="right" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:textColor="#ffffff"
-        android:layout_gravity="center_horizontal" />
+
 
 </LinearLayout>

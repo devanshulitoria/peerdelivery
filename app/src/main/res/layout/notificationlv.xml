@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="8dp"
+        android:weightSum="1"
+        android:background="#ffebeff1"
+        android:id="@+id/lvLinearLayout"
+        android:orientation="horizontal"
+        >
+
+        <!-- add views here that you want to show at the top !-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/lvImage"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:src="@drawable/airplane"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="3">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BLR->DEL"
+            android:id="@+id/lvHeading"
+            android:textSize="10sp"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15th-Mar-2016"
+            android:id="@+id/lvContent"
+            android:typeface="sans"
+            android:textSize="8sp"
+            android:textColor="#4c22ff"
+            android:textAppearance="@android:color/holo_blue_light" />
+        </LinearLayout>
+
+
+    </LinearLayout>

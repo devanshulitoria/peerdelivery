@@ -2,6 +2,8 @@ package peerdelivers.peerdelivery;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 
 import android.content.Intent;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     static String message = PreStart.phoneNo;
     static String secretCode=PreStart.uuid;
     HashMap<String,String> notifydata=new HashMap<String,String>();
-    Context ct;
+    static Context ct;
     long msG_ID;
    ListView mDrawerList;
     ListView tListView;
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        scheduleAlarm();
         ct=getApplication();
 
         CheckConnection.isConnected(getApplicationContext(), MainActivity.this);
@@ -97,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
             addDrawerItems();
             setupDrawer();
 
-            ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this,
-                    R.layout.listview_layout, R.id.listTextView, testArry);
+            //ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this,
+               //     R.layout.listview_layout, R.id.listTextView, testArry);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -172,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         JSONArray jsa = new JSONArray();
         Long lastsmsId= Long.valueOf(0);
         int j=0;
-        Log.e("last read id:",String.valueOf(msG_ID));
+        Log.e("last read id:", String.valueOf(msG_ID));
         hm= new LinkedList<HashMap<String, String>>();
         while (cur.moveToNext()) {
             if((i++)==0) {
@@ -277,7 +280,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-
+    public  Context getContext(){
+        return getApplicationContext();
+    }
 
 
     @Override
@@ -298,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 //item.setIcon(R.drawable.notification);
-                startActivity(new Intent(getApplicationContext(), about.class));
+                startActivity(new Intent(getApplicationContext(), ServerNotifications.class));
                 tv.setText("");
                 tv.setVisibility(View.INVISIBLE);
 
@@ -315,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        Log.e("Menu ID:",String.valueOf(id));
+        Log.e("Menu ID:", String.valueOf(id));
         //noinspection SimplifiableIfStatement
         if (id == R.id.about) {
 
@@ -338,5 +343,25 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    // Setup a recurring alarm every half hour
+    public void scheduleAlarm() {
+        // Construct an intent that will execute the AlarmReceiver
+        Log.e("Schedule alaram called","devanshu");
+        Intent intent = new Intent(getApplicationContext(), MyAlarmReceiver.class);
+        Log.e("Schedule alaram called1","devanshu");
+        // Create a PendingIntent to be triggered when the alarm goes off
+        final PendingIntent pIntent = PendingIntent.getBroadcast(this, MyAlarmReceiver.REQUEST_CODE,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Log.e("Schedule alaram called2","devanshu");
+        // Setup periodic alarm every 5 seconds
+        long firstMillis = System.currentTimeMillis(); // alarm is set right away
+        Log.e("Schedule alaram called3",String.valueOf(firstMillis));
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        Log.e("Schedule alaram called4","devanshu");
+        // First parameter is the type: ELAPSED_REALTIME, ELAPSED_REALTIME_WAKEUP, RTC_WAKEUP
+        // Interval can be INTERVAL_FIFTEEN_MINUTES, INTERVAL_HALF_HOUR, INTERVAL_HOUR, INTERVAL_DAY
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
+                AlarmManager.INTERVAL_HALF_DAY, pIntent);
+        Log.e("Schedule alaram called5", "devanshu");
+    }
 }

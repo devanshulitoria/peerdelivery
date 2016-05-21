@@ -42,7 +42,7 @@ public class NotifyManager{
 
         builder.setOngoing(false);
         builder.build();
-        Intent notificationIntent = new Intent(mContext, about.class);
+        Intent notificationIntent = new Intent(mContext, ServerNotifications.class);
         PendingIntent pending = PendingIntent.getActivity(mContext, 0, notificationIntent, 0);
         builder.setContentIntent(pending);
         notify = builder.getNotification();

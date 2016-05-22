@@ -13,6 +13,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -74,16 +75,14 @@ public class MainActivity extends AppCompatActivity {
     private String mActivityTitle;
     List<HashMap<String,String>> hm;
     Typeface custom_font;
-     int counterValue=0;
 
-    String[] testArry={"devanshu","siddharth","aditya","himanshu","tatti","pheshab","cannada","India","Chutiya","Randi ka baccha"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        scheduleAlarm();
+       // scheduleAlarm();
         ct=getApplication();
 
         CheckConnection.isConnected(getApplicationContext(), MainActivity.this);
@@ -156,8 +155,9 @@ public class MainActivity extends AppCompatActivity {
                 sms = String.valueOf(sharedpreferences.getLong("user_id", 0));
             }
 
+        MyAsyncTask task = new MyAsyncTask();
+        task.execute();
 
-            getSMS();
 
     }
     public void getSMS(){
@@ -240,7 +240,18 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                Log.e("position devanshu",String.valueOf(position));
+                switch(position) {
+                    case 4:
+                        Intent a = new Intent(MainActivity.this, CarrierActivity.class);
+                        startActivity(a);
+                        break;
+                    case 5:
+                        Intent b = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(b);
+                        break;
+                    default:
+                }
             }
         });
     }
@@ -364,4 +375,35 @@ public class MainActivity extends AppCompatActivity {
                 AlarmManager.INTERVAL_HALF_DAY, pIntent);
         Log.e("Schedule alaram called5", "devanshu");
     }
+    ///async task to collect all the text messages
+
+    private class MyAsyncTask extends AsyncTask<List<HashMap<String,String>>,Integer,String> {
+
+        @Override
+        protected void onPreExecute() {
+            // Runs on the UI thread before doInBackground()
+        }
+
+        @Override
+        protected String doInBackground(List<HashMap<String, String>>... params) {
+            // Perform an operation on a background thread
+            Log.e("background","devanshu");
+            getSMS();
+            return null;
+        }
+
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            // Runs on the UI thread after doInBackground()
+
+        }
+
+
+    }
+
+
+
+
 }

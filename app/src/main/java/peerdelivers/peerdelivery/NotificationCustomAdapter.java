@@ -33,6 +33,9 @@ public class NotificationCustomAdapter extends ArrayAdapter<HashMap<String,Strin
         this.notificationList = objects;
 
     }
+
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context

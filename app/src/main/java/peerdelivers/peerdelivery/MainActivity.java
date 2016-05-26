@@ -4,8 +4,12 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
@@ -14,11 +18,14 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.method.ScrollingMovementMethod;
@@ -44,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
     String sms="";
     Filtering ft;
     SpannableString s;
-    Button button,notify;
-    TextView view;
-    TextView mCounter;
-    NotifyManager nm;
+    TextView view,not_found;
     public static final String user_id = "user_id" ;
     SharedPreferences sharedpreferences,smsSharedPreferences;
     static String message = PreStart.phoneNo;
@@ -75,20 +80,36 @@ public class MainActivity extends AppCompatActivity {
     private String mActivityTitle;
     List<HashMap<String,String>> hm;
     Typeface custom_font;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private final BroadcastReceiver mybroadcast = new IncomingSms();
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
+
        // scheduleAlarm();
         ct=getApplication();
 
         CheckConnection.isConnected(getApplicationContext(), MainActivity.this);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
             view = (TextView) findViewById(R.id.devanshu);
-            view.setMovementMethod(new ScrollingMovementMethod());
-            tListView = (ListView) findViewById(R.id.travelList);
+
+
 
             mDrawerList = (ListView) findViewById(R.id.navList);
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,47 +117,11 @@ public class MainActivity extends AppCompatActivity {
             custom_font = Typeface.createFromAsset(getAssets(), "fonts/myriad-set-pro_thin.ttf");
             view.setTypeface(custom_font);
 
+
             addDrawerItems();
             setupDrawer();
 
-            //ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this,
-               //     R.layout.listview_layout, R.id.listTextView, testArry);
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setHomeButtonEnabled(true);
-            ft = new Filtering();
-
-
-            button = (Button) findViewById(R.id.b_next);
-            notify = (Button) findViewById(R.id.notify);
-            button.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-
-                    Intent goToNextActivity = new Intent(getApplicationContext(), SearchForPeer.class);
-                    startActivity(goToNextActivity);
-
-                }
-
-            });
-
-            notify.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View arg0) {
-                    notifydata.put("title", "This is a sample title");
-                    notifydata.put("content", "this is a sample content");
-                    nm = new NotifyManager(ct);
-                    nm.notifying(notifydata);
-                    //mCounter.setText(String.valueOf(counterValue++));
-
-
-                }
-
-            });
-
-            Bundle bundle = getIntent().getExtras();
             // static String message = PreStart;//bundle.getString("user_id");
             //optimizing sms reading...not reading a sms which is already read.
             smsSharedPreferences = getSharedPreferences("last_read_msg_id", Context.MODE_PRIVATE);
@@ -155,93 +140,37 @@ public class MainActivity extends AppCompatActivity {
                 sms = String.valueOf(sharedpreferences.getLong("user_id", 0));
             }
 
-        MyAsyncTask task = new MyAsyncTask();
-        task.execute();
 
 
-    }
-    public void getSMS(){
-        Uri uriSMSURI = Uri.parse("content://sms/inbox");
-        Cursor cur = getContentResolver().query(uriSMSURI, new String[]{"_id", "address", "date", "body"}, null, null, null);
-       // long total=cur.getCount();
-        int i=0;
-
-
-        String temp=null;
-        String type=null;
-        int m=0;
-        String body;
-        JSONObject jso = new JSONObject();
-        JSONArray jsa = new JSONArray();
-        Long lastsmsId= Long.valueOf(0);
-        int j=0;
-        Log.e("last read id:", String.valueOf(msG_ID));
-        hm= new LinkedList<HashMap<String, String>>();
-        while (cur.moveToNext()) {
-            if((i++)==0) {
-                //to be uncommented during production
-               // lastsmsId=Long.parseLong(cur.getString(0));
-            }
-            temp = cur.getString(1);
-            body = cur.getString(3);
-            Log.e(temp, "value");
-            Log.e("_id",cur.getString(0));
-            if (Long.parseLong(cur.getString(0)) > msG_ID){
-                if (body.contains("PNR")) {
-                    type = ft.filter(temp);
-                    Log.e(type, "type of transport");
-                    if (type.equalsIgnoreCase("train") || type.equalsIgnoreCase("FLIGHT")) {
-                        try {
-                            HashMap<String,String> tDetail=new HashMap<String,String>();
-                            jso.put("TYPE", type);
-                            jso.put("BODY", cur.getString(3));
-                            jso.put("DATE", cur.getString(2));
-
-                            jsa.put(m++, jso);
-                            tDetail.put("type",type);
-                            tDetail.put("content", cur.getString(3));
-                            if(cur.getString(3).contains("DEVANSHU"))
-                            tDetail.put("status","N");
-                            else
-                                tDetail.put("status","A");
-                            //sms += "Type:" + type + " Body:" + cur.getString(3) + " Date:" + cur.getString(2) + "\n";
-                            //sms += "--------------------------------------------------------------------------\n";
-                            hm.add(tDetail);
-
-                        } catch (JSONException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                }
-
-        }
-            //lastsmsId=Long.parseLong(cur.getString(0));
-        }
-        SharedPreferences.Editor editor = smsSharedPreferences.edit();
-        editor.putLong("last_msg_id", lastsmsId);
-        editor.commit();
-
-       view.setText("Welcome back " + sms);
-        Log.e(jsa.toString(), "JSON");
-        travelList=new CustomAdapter(this,hm);
-        travelList.setListView(tListView);
-        tListView.setAdapter(travelList);
 
     }
+
+
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new FragmentYourActivity(), "Your Activity");
+        adapter.addFragment(new FragmentYourFriendsActivity(), "Friends Activity");
+        viewPager.setAdapter(adapter);
+    }
+
 
     private void addDrawerItems() {
-        String[] osArray = { "Home", "Notification", "History", "Sent Items", "Received Items","Settings" };
+        String[] osArray = { "Home", "Notification", "History", "Sent your Items", "Received Items","Settings" };
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         mDrawerList.setAdapter(mAdapter);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("position devanshu",String.valueOf(position));
+                Log.e("position drawer click", String.valueOf(position));
+
+
                 switch(position) {
+                    case 3:
+                        Intent goToNextActivity = new Intent(MainActivity.this, SearchForPeer.class);
+                        startActivity(goToNextActivity);
+                        break;
                     case 4:
                         Intent a = new Intent(MainActivity.this, CarrierActivity.class);
                         startActivity(a);
@@ -318,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 tv.setText("");
                 tv.setVisibility(View.INVISIBLE);
 
+
             }
 
         });
@@ -377,33 +307,35 @@ public class MainActivity extends AppCompatActivity {
     }
     ///async task to collect all the text messages
 
-    private class MyAsyncTask extends AsyncTask<List<HashMap<String,String>>,Integer,String> {
 
-        @Override
-        protected void onPreExecute() {
-            // Runs on the UI thread before doInBackground()
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
 
         @Override
-        protected String doInBackground(List<HashMap<String, String>>... params) {
-            // Perform an operation on a background thread
-            Log.e("background","devanshu");
-            getSMS();
-            return null;
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
         }
-
-
 
         @Override
-        protected void onPostExecute(String result) {
-            // Runs on the UI thread after doInBackground()
-
+        public int getCount() {
+            return mFragmentList.size();
         }
 
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
-
-
 
 
 }

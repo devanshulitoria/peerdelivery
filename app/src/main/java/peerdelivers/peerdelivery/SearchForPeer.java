@@ -1,6 +1,7 @@
 package peerdelivers.peerdelivery;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.HttpEntity;
@@ -39,7 +42,8 @@ public class SearchForPeer extends AppCompatActivity {
         private RadioGroup itemRadioGroup;
         private RadioButton itemRadioButton;
     private static final String LOG_TAG = "PostSample";
-    String[] cities={
+    static HashMap<String,Integer> hmCities;
+    static String[] cities={
             "North and Middle Andaman" ,
             "South Andaman" ,
             "Nicobar" ,
@@ -667,8 +671,7 @@ public class SearchForPeer extends AppCompatActivity {
             "Midnapore" ,
             "Murshidabad" ,
             "Nadia" ,
-            "North 24 Parganas" ,
-            "South 24 Parganas" ,
+            "Parganas" ,
             "Purulia" ,
             "Uttar Dinajpur"};
     AutoCompleteTextView source;
@@ -741,6 +744,8 @@ public class SearchForPeer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        hashmapCities();
+
        itemRadioGroup = (RadioGroup) findViewById(R.id.radioGroupitems);
         source=(AutoCompleteTextView)findViewById(R.id.autoCompleteSource);
         destination=(AutoCompleteTextView)findViewById(R.id.autocompleteDest);
@@ -748,7 +753,6 @@ public class SearchForPeer extends AppCompatActivity {
         adapter = new ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line,cities);
         source.setThreshold(1);//will start working from first character
         source.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-        source.setTextColor(Color.BLACK);
         source.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -783,9 +787,18 @@ public class SearchForPeer extends AppCompatActivity {
             public void onClick(View view) {
                 int selectedId = itemRadioGroup.getCheckedRadioButtonId();
                 itemRadioButton = (RadioButton) findViewById(selectedId);
-                Toast.makeText(getBaseContext(),itemRadioButton.getTag()+","+DestText ,
-                        Toast.LENGTH_LONG).show();
-                sendPOSTRequest("devanshu");
+                if (preCheckBeforeSending()) {
+                    //sendPOSTRequest("devanshu");
+                    Intent a = new Intent(SearchForPeer.this, SearchResult.class);
+                    a.putExtra("from", source.getText().toString().trim().toUpperCase());
+                    a.putExtra("to", destination.getText().toString().trim().toUpperCase());
+                    a.putExtra("item", itemRadioButton.getTag().toString().trim().toUpperCase());
+                    startActivity(a);
+                }
+                else{
+                    Toast.makeText(getBaseContext(), "You choose wrong source and Destination",
+                            Toast.LENGTH_LONG).show();
+                }
 
 
             }
@@ -793,6 +806,23 @@ public class SearchForPeer extends AppCompatActivity {
 
 
 
+    }
+public static void hashmapCities(){
+    hmCities=new HashMap<String,Integer>();
+    for(int i=0;i<cities.length;i++){
+        hmCities.put(cities[i].trim().toUpperCase(),i);
+    }
+
+}
+    private boolean preCheckBeforeSending() {
+        if(source.getText().toString().equalsIgnoreCase(destination.getText().toString())&& (source.getText().toString()!=null) && (destination.getText().toString()!=null)){
+            return false;
+        }
+        else if(!(hmCities.containsKey(source.getText().toString().trim().toUpperCase())&& hmCities.containsKey(destination.getText().toString().trim().toUpperCase())) && (itemRadioButton.getTag().toString()!=null)){
+            return false;
+        }
+        else
+        return true;
     }
 
     @Override

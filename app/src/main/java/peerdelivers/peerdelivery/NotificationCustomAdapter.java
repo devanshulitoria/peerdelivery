@@ -2,6 +2,7 @@ package peerdelivers.peerdelivery;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,10 @@ public class NotificationCustomAdapter extends ArrayAdapter<HashMap<String,Strin
     TextView nHeading,nTime,nContent,nId;
     LinearLayout nLayout;
     public NotificationCustomAdapter(Context context, List<HashMap<String,String>> objects) {
-        super(context, R.layout.notificationlv, objects);
+        super(context, R.layout.notification_custom_adapter, objects);
         this.context = context;
         this.notificationList = objects;
+        Log.e("called hahaha","devanhu");
 
     }
 
@@ -40,12 +42,13 @@ public class NotificationCustomAdapter extends ArrayAdapter<HashMap<String,Strin
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.notificationlv, parent, false);
+        View rowView = inflater.inflate(R.layout.notification_custom_adapter, parent, false);
         custom_font = Typeface.createFromAsset(context.getAssets(), "fonts/myriad-set-pro_thin.ttf");
         nHeading = (TextView) rowView.findViewById(R.id.lvHeading);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
-        str=notificationList.get(position).get("content").toString();
-        nHeading.setText(str);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.lvImage);
+       // str=notificationList.get(position).get("content").toString();
+        Log.e("Position devanshu",String.valueOf(position));
+       // nHeading.setText(str);
         nHeading.setTypeface(custom_font);
 //        String not_id = notificationList.get(position).get("id").toString();
 //        String not_type = notificationList.get(position).get("type").toString();
@@ -57,5 +60,13 @@ public class NotificationCustomAdapter extends ArrayAdapter<HashMap<String,Strin
     }
     public void setListView(ListView view) {
         listView = view;
+    }
+    public void remove(int position){
+        for(int i=0;i<position;i++) {
+            Log.e("custom notification", String.valueOf(i));
+            remove(getItem(0));
+            notifyDataSetChanged();
+        }
+
     }
 }

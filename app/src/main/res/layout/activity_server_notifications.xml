@@ -3,13 +3,44 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/background">
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/holo_orange_dark"
+        android:layout_marginBottom="5dp">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark all as Read"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            android:id="@+id/bt_mark_as_read" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            android:id="@+id/bt_sort" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            android:id="@+id/bt_filter" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,5 +48,6 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
         android:background="@android:color/transparent"/>
-    </LinearLayout>
+        </LinearLayout>
+
 </LinearLayout>

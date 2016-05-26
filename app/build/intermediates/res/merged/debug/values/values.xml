@@ -571,11 +571,15 @@ available. Please contact the developer for assistance.</string>
     <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_about">About</string>
+    <string name="title_activity_activity_accepted">activity_accepted</string>
+    <string name="title_activity_activity_rejected">Sorry</string>
     <string name="title_activity_carrier">Your Request</string>
     <string name="title_activity_facebook_login">FacebookLogin</string>
     <string name="title_activity_pre_main">preMain</string>
     <string name="title_activity_pre_start">PeerDelivery</string>
-    <string name="title_activity_search_for_peer">SearchForPeer</string>
+    <string name="title_activity_result">Result</string>
+    <string name="title_activity_search_for_peer">Search for Peers</string>
+    <string name="title_activity_search_result">Search Result</string>
     <string name="title_activity_server_notification">Your Notifications</string>
     <string name="title_activity_server_notifications">Your Notifications</string>
     <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/values/strings_activity_settings.xml -->
@@ -583,6 +587,7 @@ available. Please contact the developer for assistance.</string>
     <string name="title_activity_settings">Settings</string>
     <!-- From: file:/C:/Users/iMac/AndroidStudioProjects/PeerDelivery/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="title_activity_splash">SplashActivity</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>

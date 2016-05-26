@@ -6,7 +6,7 @@
     <string name="about">About</string>
     <string name="title_activity_pre_start">PeerDelivery</string>
     <string name="permission_contacts_rationale">Send and Read Sms permissions are needed by this application to work!</string>
-    <string name="title_activity_search_for_peer">SearchForPeer</string>
+    <string name="title_activity_search_for_peer">Search for Peers</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_pre_main">preMain</string>
     <string name="title_activity_facebook_login">FacebookLogin</string>
@@ -23,4 +23,9 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    <string name="title_activity_search_result">Search Result</string>
+    <string name="title_activity_result">Result</string>
+    <string name="title_activity_activity_accepted">activity_accepted</string>
+    <string name="title_activity_activity_rejected">Sorry</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

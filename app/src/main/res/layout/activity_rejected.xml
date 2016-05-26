@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peerdelivers.peerdelivery.activity_rejected"
+    android:background="@drawable/backgroud2"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Request Someone else"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_green_light"
+            android:id="@+id/bt_request"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_purple"
+            android:layout_weight="1"
+            android:id="@+id/bt_home" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/iv_profilepic"
+        android:src="@drawable/team"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Devanshu Litoria"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/iv_profilepic"
+        android:layout_toEndOf="@+id/iv_profilepic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Oracle Financial Services"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/iv_profilepic"
+        android:layout_toEndOf="@+id/iv_profilepic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Acceptance Probablity : 0.25"
+        android:textColor="@android:color/white"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_toRightOf="@+id/iv_profilepic"
+        android:layout_toEndOf="@+id/iv_profilepic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bangalore to Delhi"
+        android:textColor="@android:color/white"
+        android:id="@+id/textView5"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/iv_profilepic"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="on"
+        android:id="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView5"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="15th-June-2016"
+        android:id="@+id/tv_doj"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="We are very sorry to inform you that Mark has refused your request to carry your item!"
+        android:id="@+id/tv_displayMessage"
+        android:textSize="30sp"
+        android:layout_below="@+id/tv_doj"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Reason for Rejection"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/tv_displayMessage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="I don't give a fine fuck about your item"
+        android:id="@+id/reason_for_rejection"
+        android:layout_below="@+id/textView7"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

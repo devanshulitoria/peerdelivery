@@ -7,8 +7,8 @@
 
     <Button
         android:id="@+id/bt_noti"
-        android:layout_width="35dip"
-        android:layout_height="35dip"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
         android:background="@drawable/notification"
         android:gravity="center"
         android:padding="2dp"
@@ -21,8 +21,9 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/shape_notification"
         android:padding="8dp"
-        android:text=""
+        android:text="99+"
         android:textSize="10sp"
-        android:textColor="#ffffff" />
+        android:textColor="@android:color/white"
+        android:elevation="2dp" />
 
 </RelativeLayout>

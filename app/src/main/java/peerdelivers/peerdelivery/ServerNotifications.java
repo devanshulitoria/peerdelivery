@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,21 +18,27 @@ public class ServerNotifications extends AppCompatActivity {
     ListView serverNotificatioLV;
     private List<HashMap<String,String>> hm;
     private NotificationCustomAdapter nca;
+    Button sort,filter,mark;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_notifications);
         CheckConnection.isConnected(getApplicationContext(), ServerNotifications.this);
+        sort=(Button)findViewById(R.id.bt_sort);
+        filter=(Button)findViewById(R.id.bt_filter);
+        mark=(Button)findViewById(R.id.bt_mark_as_read);
+
+
         hm= new LinkedList<HashMap<String, String>>();
         serverNotificatioLV=(ListView) findViewById(R.id.listViewServerNotification);
-        HashMap<String,String> tDetail=new HashMap<String,String>();
+        final HashMap<String,String> tDetail=new HashMap<String,String>();
         tDetail.put("content", "xyz");
         tDetail.put("time", "xxx min ago");
         hm.add(tDetail);
-        HashMap<String,String> tD=new HashMap<String,String>();
-        tD.put("content","xyz1");
-        tD.put("time", "xxx min ago2");
-        hm.add(tD);
+
+        tDetail.put("content","xyz1");
+        tDetail.put("time", "xxx min ago2");
+        hm.add(tDetail);
         nca=new NotificationCustomAdapter(ServerNotifications.this,hm);
         nca.setListView(serverNotificatioLV);
         serverNotificatioLV.setAdapter(nca);
@@ -39,13 +46,41 @@ public class ServerNotifications extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+
                 Toast.makeText(getApplicationContext(),
                         "Click ListItem Number " + parent.getItemAtPosition(position), Toast.LENGTH_LONG)
                         .show();
             }
         });
 
+            sort.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),
+                            "Sorting", Toast.LENGTH_LONG)
+                            .show();
+                }
+            });
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),
+                        "Filtering", Toast.LENGTH_LONG)
+                        .show();
+            }
 
+        });
+
+        mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),
+                        "Marking", Toast.LENGTH_LONG)
+                        .show();
+                nca.remove(2);
+
+            }
+        });
 
     }
 

@@ -176,6 +176,7 @@ public class CustomAdapter extends ArrayAdapter<HashMap<String,String>> {
         }
 
         private void swipeRemove() {
+
             remove(getItem(position));
             notifyDataSetChanged();
         }

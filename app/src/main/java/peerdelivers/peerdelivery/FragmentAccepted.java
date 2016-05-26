@@ -40,11 +40,6 @@ public class FragmentAccepted extends ListFragment implements AdapterView.OnItem
         tDetail.put("content", "xyz");
         tDetail.put("time", "xxx min ago");
         hm.add(tDetail);
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, values);
         nca=new NotificationCustomAdapter(getContext(),hm);
         setListAdapter(nca);
         getListView().setOnItemClickListener(this);

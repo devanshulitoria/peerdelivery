@@ -64,44 +64,5 @@ public class preMain extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void registerUser() {
 
-        Log.e("inside devanshu", "posst request devanshu");
-        params = new RequestParams();
-        params.put("phoneNumber",message.substring(3));
-        params.put("code",secretCode);
-
-        client = new AsyncHttpClient();
-
-
-
-        client.post( URL,params , new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onStart() {
-                // called before request is started
-                Log.e("HTTP", "STARTED");
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-                // called when response HTTP status is "200 OK"
-                String s = new String(response);
-                Log.e("http response", s);
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                Log.e("http failure", errorResponse.toString());
-            }
-
-            @Override
-            public void onRetry(int retryNo) {
-                // called when request is retried
-                Log.e("retry", String.valueOf(retryNo));
-            }
-        });
-    }
 }

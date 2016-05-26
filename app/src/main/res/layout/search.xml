@@ -11,8 +11,10 @@
         android:id="@+id/autoCompleteSource"
         android:padding="5dip"
         android:textColor="#ffffff"
-        android:layout_marginTop="25dip"
-        android:gravity="center"/>
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:theme="@style/AppTheme"
+        android:background="@android:color/transparent" />
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteDest"
@@ -21,15 +23,10 @@
         android:hint="Enter Destination"
         android:padding="5dip"
         android:textColor="#ffffff"
-        android:layout_marginTop="25dip"
-        android:gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Item is:"
-        android:textColor="@android:color/white"
-        android:layout_margin="5dp"
-        android:textSize="15sp"/>
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:background="@android:color/transparent" />
+
     <HorizontalScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -38,7 +35,16 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Item is:"
+            android:textColor="@android:color/white"
+            android:layout_margin="5dp"
+            android:layout_marginTop="25dp"
+            android:textSize="15sp"/>
 
 
         <RadioGroup
@@ -58,7 +64,8 @@
                 android:layout_height="70dp"
                 android:background="@drawable/booksxml"
                 android:layout_marginRight="10dp"
-                android:button="@android:color/transparent"/>
+                android:button="@android:color/transparent"
+                android:checked="false" />
 
             <RadioButton
                 android:id="@+id/radioClothes"
@@ -103,8 +110,10 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/planesend"
+        android:background="@drawable/search"
         android:id="@+id/b_searchPeer"
+        android:layout_margin="5dp"
+        android:layout_marginTop="25dp"
         android:layout_gravity="right" />
 
 

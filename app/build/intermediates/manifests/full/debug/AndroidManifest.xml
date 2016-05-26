@@ -74,11 +74,6 @@
         <activity
             android:name="peerdelivers.peerdelivery.FacebookLogin"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="peerdelivers.peerdelivery.ServerNotifications"
@@ -97,6 +92,32 @@
         <activity
             android:name="peerdelivers.peerdelivery.SettingsActivity"
             android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.SearchResult"
+            android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.Result"
+            android:label="@string/title_activity_result" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.activity_accepted"
+            android:label="@string/title_activity_activity_accepted" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.activity_rejected"
+            android:label="@string/title_activity_activity_rejected" >
+        </activity>
+        <activity
+            android:name="peerdelivers.peerdelivery.SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/MyMaterialTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,7 +42,7 @@ public class PreStart extends AppCompatActivity {
     static String phoneNo;
     static String[] message;
     static String uuid;
-    private static PreStart inst;
+    public static PreStart inst;
     public static final String user_id = "user_id";
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     SharedPreferences sharedpreferences;
@@ -64,11 +66,13 @@ public class PreStart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pre_start);
         CheckConnection.isConnected(getApplicationContext(), PreStart.this);
+        inst=PreStart.this;
 
 
 
         sendBtn = (Button) findViewById(R.id.btnSendSMS);
         txtphoneNo = (EditText) findViewById(R.id.editText);
+        txtphoneNo.setImeOptions(EditorInfo.IME_ACTION_DONE);
         sharedpreferences = getSharedPreferences(user_id, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         if (sharedpreferences.getLong("user_id", 0) != 0) {
@@ -80,7 +84,9 @@ public class PreStart extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-
+                sendBtn.setEnabled(false);
+                sendBtn.setText("Waiting for text message!");
+                sendBtn.setBackgroundColor(Color.GRAY);
                 accessPermissions();
 
 
@@ -172,18 +178,5 @@ public class PreStart extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

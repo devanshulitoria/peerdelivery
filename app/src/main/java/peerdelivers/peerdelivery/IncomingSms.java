@@ -53,20 +53,23 @@ PreStart pp;
                     String message = currentMessage.getDisplayMessageBody();
 
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
-                    // Show Alert
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(context,
-                            "senderNum: " + senderNum + ", message: " + message, duration);
-                    toast.show();
+//                    // Show Alert
+//                    int duration = Toast.LENGTH_LONG;
+//                    Toast toast = Toast.makeText(context,
+//                            "senderNum: " + senderNum + ", message: " + message, duration);
+//                    toast.show();
                     Log.e("devanshu broadcast",senderNum+","+message+","+PreStart.phoneNo+","+PreStart.message[0]);
                     if (pp.phoneNo.contentEquals(senderNum) && pp.message[0].contentEquals(message)){
                         Log.e("devanshu ", "inside if condition");
 
-                        Intent inte = new Intent(context,MainActivity.class);
+                        Intent inte = new Intent(context,FacebookLogin.class);
+                        inte.putExtra("phNumber",PreStart.phoneNo);
+                        inte.putExtra("auth_code",PreStart.uuid);
 
                         inte.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                         context.startActivity(inte);
+
 
 
                     }

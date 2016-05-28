@@ -38,12 +38,29 @@ public class FacebookLogin extends AppCompatActivity {
     CallbackManager callbackManager;
     String tempdata="kela kela";
     TextView tv;
+    String phNumber,auth_code;
     Typeface custom_font;
     AccessTokenTracker accessTokenTracker;
+    String fbAccessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                phNumber= null;
+                auth_code=null;
+
+            } else {
+                phNumber= extras.getString("phNumber");
+                auth_code= extras.getString("auth_code");
+
+            }
+        } else {
+            phNumber= (String) savedInstanceState.getSerializable("phNumber");
+            auth_code= (String) savedInstanceState.getSerializable("auth_code");
+        }
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager=CallbackManager.Factory.create();
         setContentView(R.layout.activity_facebook_login);
@@ -54,13 +71,6 @@ public class FacebookLogin extends AppCompatActivity {
                 updateWithToken(newAccessToken);
             }
         };
-        if(AccessToken.getCurrentAccessToken()!=null){
-            Intent i = new Intent(FacebookLogin.this, MainActivity.class);
-            startActivity(i);
-
-            finish();
-
-        }
         LoginManager.getInstance().logInWithReadPermissions(
                 this,
                 Arrays.asList("email", "user_birthday", "user_work_history", "user_friends"));
@@ -79,9 +89,19 @@ public class FacebookLogin extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 // App code
                 Log.e("facebook 1","devanshu");
-                String str=loginResult.getAccessToken().getToken();
-                Log.e("Facebook token",str);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                loginButton.setEnabled(false);
+                tv.setText("Please Wait! We are logging you in.");
+                fbAccessToken=loginResult.getAccessToken().getToken();
+                Log.e("Facebook token", fbAccessToken);
+                Intent i = new Intent(FacebookLogin.this, MainActivity.class);
+                i.putExtra("fbToken",fbAccessToken);
+                //<// TODO: 5/28/2016  start
+                phNumber="+919706783069";
+                auth_code="ascd-55er-5fbg-qwer7-258fr";
+                i.putExtra("phNumber",phNumber);
+                i.putExtra("auth_code", auth_code);
+                //// TODO: 5/28/2016  end
+                startActivity(i);
                 finish();
 //                new GraphRequest(
 //                        AccessToken.getCurrentAccessToken(),
@@ -149,6 +169,9 @@ public class FacebookLogin extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent i = new Intent(FacebookLogin.this, MainActivity.class);
+                    i.putExtra("fbToken",fbAccessToken);
+                    i.putExtra("phNumber",phNumber);
+                    i.putExtra("auth_code",auth_code);
                     startActivity(i);
 
                     finish();

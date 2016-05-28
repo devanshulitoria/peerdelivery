@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -749,6 +750,8 @@ public class SearchForPeer extends AppCompatActivity {
        itemRadioGroup = (RadioGroup) findViewById(R.id.radioGroupitems);
         source=(AutoCompleteTextView)findViewById(R.id.autoCompleteSource);
         destination=(AutoCompleteTextView)findViewById(R.id.autocompleteDest);
+            source.setImeOptions(EditorInfo.IME_ACTION_DONE);
+            destination.setImeOptions(EditorInfo.IME_ACTION_DONE);
         Search=(Button)findViewById(R.id.b_searchPeer);
         adapter = new ArrayAdapter(this,android.R.layout.simple_dropdown_item_1line,cities);
         source.setThreshold(1);//will start working from first character

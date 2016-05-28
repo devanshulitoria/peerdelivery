@@ -5,7 +5,8 @@
     android:layout_height="fill_parent"
     android:padding="8dp"
     android:background="@drawable/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/ll_search_activity">
 
     <LinearLayout
         android:orientation="horizontal"

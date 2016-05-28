@@ -47,7 +47,6 @@ public class NotificationCustomAdapter extends ArrayAdapter<HashMap<String,Strin
         nHeading = (TextView) rowView.findViewById(R.id.lvHeading);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.lvImage);
        // str=notificationList.get(position).get("content").toString();
-        Log.e("Position devanshu",String.valueOf(position));
        // nHeading.setText(str);
         nHeading.setTypeface(custom_font);
 //        String not_id = notificationList.get(position).get("id").toString();

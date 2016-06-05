@@ -1,5 +1,6 @@
 package peerdelivers.peerdelivery;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -50,6 +51,8 @@ public class ServerNotifications extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Click ListItem Number " + parent.getItemAtPosition(position), Toast.LENGTH_LONG)
                         .show();
+                Intent goToNextActivity = new Intent(ServerNotifications.this, activity_accepted.class);
+                startActivity(goToNextActivity);
             }
         });
 

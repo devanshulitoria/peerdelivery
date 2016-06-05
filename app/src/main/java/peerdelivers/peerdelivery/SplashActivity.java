@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     TextView temp;
     WebView view;
     SharedPreferences cookies;
-    String fbID,auth_code;
+    String fbID,auth_code,phNumber;
     SharedPreferences sharedpreferences;
     final String URL="http://192.168.137.1/splashActivity.php";
     RequestParams params;
@@ -80,9 +80,10 @@ public class SplashActivity extends AppCompatActivity {
         sharedpreferences = getSharedPreferences("user_id", Context.MODE_PRIVATE);
         fbID=sharedpreferences.getString("facebook_id", null);
         auth_code=sharedpreferences.getString("auth_code", null);
+        phNumber=String.valueOf(sharedpreferences.getLong("phNumber", 0));
         Log.e("inside devanshu", "post request devanshu");
 
-        if(fbID==null || auth_code==null)
+        if(fbID==null && auth_code==null && phNumber=="0")
         {
             Toast.makeText(getApplicationContext(),
                     "Mother fuck...cookie missing,SplashActivity", Toast.LENGTH_LONG)
@@ -93,6 +94,7 @@ public class SplashActivity extends AppCompatActivity {
         params = new RequestParams();
         params.put("fbID",fbID);
         params.put("auth_code",auth_code);
+        params.put("phNumber",phNumber);
 
         myClient = new AsyncHttpClient();
 

@@ -2,19 +2,33 @@ package peerdelivers.peerdelivery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -24,8 +38,14 @@ import com.loopj.android.http.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
@@ -680,65 +700,17 @@ public class SearchForPeer extends AppCompatActivity {
     ArrayAdapter adapter;
     String sourceText,DestText;
     AsyncHttpClient client;
-    final String URL="http://146.148.22.97/kela.php";
+    final String URL="http://192.168.137.1/test64.php";
     RequestParams params;
-
-    public void sendPOSTRequest(String data){
-        Log.e("inside devanshu","posst request devanshu");
-        params = new RequestParams();
-        params.put("name", "devanshu litoria kela kela");
-        //params.put("more", "data");
-        client = new AsyncHttpClient();
-        JSONObject jdata = new JSONObject();
-        Log.e("inside","posst request devanshu");
-        try {
-            jdata.put("name", "devanshu HE JEY HEY");
-            //jdata.put("key2", val2);
-        } catch (Exception ex) {
-            // json exception
-            Log.e("json","exception");
-        }
-        StringEntity  entity=null;
-        try {
-            Log.e("name:::::", (String) jdata.get("name"));
-            entity= new StringEntity(jdata.toString());
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            Log.e("exception","entity ");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        ImageView iv_postImage;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int PICK_IMAGE_REQUEST=2;
+    String mCurrentPhotoPath;
+    private PopupWindow pgallery;
+    private RadioGroup itemSort;
+    private LinearLayout ll;
 
 
-        client.post( URL,params , new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onStart() {
-                // called before request is started
-                Log.e("HTTP", "STARTED");
-            }
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-                // called when response HTTP status is "200 OK"
-                String s = new String(response);
-                Log.e("http response", s);
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                Log.e("http failure", errorResponse.toString());
-            }
-
-            @Override
-            public void onRetry(int retryNo) {
-                // called when request is retried
-                Log.e("retry", String.valueOf(retryNo));
-            }
-        });
-    }
 
 
     @Override
@@ -746,7 +718,7 @@ public class SearchForPeer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
         hashmapCities();
-
+        ll=(LinearLayout)findViewById(R.id.ll_search_for_peer);
        itemRadioGroup = (RadioGroup) findViewById(R.id.radioGroupitems);
         source=(AutoCompleteTextView)findViewById(R.id.autoCompleteSource);
         destination=(AutoCompleteTextView)findViewById(R.id.autocompleteDest);
@@ -774,12 +746,12 @@ public class SearchForPeer extends AppCompatActivity {
 
         destination.setThreshold(1);//will start working from first character
         destination.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-        destination.setTextColor(Color.rgb(255,225,255));
+        destination.setTextColor(Color.rgb(255, 225, 255));
         destination.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
-                DestText=String.valueOf(parent.getItemAtPosition(pos));
+                DestText = String.valueOf(parent.getItemAtPosition(pos));
 
             }
 
@@ -797,8 +769,7 @@ public class SearchForPeer extends AppCompatActivity {
                     a.putExtra("to", destination.getText().toString().trim().toUpperCase());
                     a.putExtra("item", itemRadioButton.getTag().toString().trim().toUpperCase());
                     startActivity(a);
-                }
-                else{
+                } else {
                     Toast.makeText(getBaseContext(), "You choose wrong source and Destination",
                             Toast.LENGTH_LONG).show();
                 }
@@ -806,9 +777,256 @@ public class SearchForPeer extends AppCompatActivity {
 
             }
         });
+         iv_postImage = (ImageView) findViewById(R.id.imVPostPicture);
+        iv_postImage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                initiatePopupWindowSort();
+
+            }
+        });
 
 
+    }
+    private void initiatePopupWindowSort(){
+        try {
+// We need to get the instance of the LayoutInflater
+            LayoutInflater inflater = (LayoutInflater) SearchForPeer.this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater.inflate(R.layout.popup_gallery,
+                    (ViewGroup) findViewById(R.id.popup_gallery_linear));
+            pgallery = new PopupWindow(layout, 300, 370, true);
+            pgallery.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            pgallery.setOutsideTouchable(false);
 
+            itemSort = (RadioGroup) layout.findViewById(R.id.radioSort);
+            itemSort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    String selected="gallery";
+                    switch(checkedId)
+                    {
+                        case R.id.camera:
+                            dispatchTakePictureIntent();
+                            break;
+                        case R.id.gallery:
+                            showFileChooser();
+                            break;
+                    }
+
+                    pgallery.dismiss();
+                }
+            });
+            pgallery.showAtLocation(ll,Gravity.NO_GRAVITY,500,500);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Log.e("SearchForPeer",ex.getMessage());
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        if(isExternalStorageWritable()){
+          Log.e("External storage","Is writable");
+        }
+        else{
+            Log.e("External storage","Is not writable");
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "PeerDelivery" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM);
+        Log.e("directory",storageDir.getAbsolutePath());
+        if (!storageDir.mkdirs()) {
+            Log.e("directory", "Directory not created");
+        }
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        try{
+            if(storageDir.mkdirs()) {
+                Log.e("directory", "Directory  created");
+            } else {
+                System.out.println("Directory is not created");
+            }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath =  image.getAbsolutePath();
+        Log.e("photo path", mCurrentPhotoPath);
+        return image;
+    }
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+
+    }
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = iv_postImage.getWidth();
+        int targetH = iv_postImage.getHeight();
+        Log.e("width",String.valueOf(targetW));
+        Log.e("height",String.valueOf(targetH));
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        Log.e("reading from",mCurrentPhotoPath);
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+
+        postImageToServer();
+
+        iv_postImage.setImageBitmap(bitmap);
+    }
+    public void postImageToServer(){
+        File myFile = new File(mCurrentPhotoPath);
+        RequestParams params = new RequestParams();
+        try {
+            params.put("picture_item", myFile);
+        }catch(FileNotFoundException e) {
+            Log.e("Exception","File not found");
+        }
+        AsyncHttpClient myClient1;
+        myClient1 = new AsyncHttpClient();
+
+        //myClient1.addHeader("Content-Type", "image/jpg");
+
+        myClient1.post(URL, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onStart() {
+                // called before request is started
+                Log.e("FRAGMENT ACTIVITY", "HTTP STARTED");
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.e("FRAGMENT ACTIVITY", "failed");
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String str) {
+                // called when response HTTP status is "200 OK"
+                Log.e("http response", str);
+
+
+//
+            }
+
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+                Log.e("retry", String.valueOf(retryNo));
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                Log.i("onFinish", "OKOKOK");
+            }
+
+        });
+
+
+    }
+
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bitmap bitmap;
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            galleryAddPic();
+            setPic();
+        }
+        if (requestCode == PICK_IMAGE_REQUEST  && resultCode == RESULT_OK) {
+            Uri filePath = data.getData();
+
+            if (Build.VERSION.SDK_INT < 11)
+                mCurrentPhotoPath = RealPathUtil.getRealPathFromURI_BelowAPI11(this, data.getData());
+
+                // SDK >= 11 && SDK < 19
+            else if (Build.VERSION.SDK_INT < 19)
+                mCurrentPhotoPath = RealPathUtil.getRealPathFromURI_API11to18(this, data.getData());
+
+                // SDK > 19 (Android 4.4)
+            else
+                mCurrentPhotoPath = RealPathUtil.getRealPathFromURI_API19(this, data.getData());
+
+            Log.e("gallery path::",mCurrentPhotoPath);
+            try {
+                //Getting the Bitmap from Gallery
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Setting the Bitmap to ImageView
+                iv_postImage.setImageBitmap(bitmap);
+               postImageToServer();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public  String getPath( Uri uri ) {
+        String result = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query( uri, proj, null, null, null );
+        if ( cursor.moveToFirst( ) ) {
+            int column_index = cursor.getColumnIndexOrThrow( MediaStore.Images.Media.DATA );
+            result = cursor.getString( column_index );
+        }
+        cursor.close( );
+        return result;
+    }
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
     }
 public static void hashmapCities(){
     hmCities=new HashMap<String,Integer>();

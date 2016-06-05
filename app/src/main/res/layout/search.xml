@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    android:id="@+id/ll_search_for_peer"
+    android:background="@drawable/backgroud2">
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="@android:color/white"
         android:hint="Enter Source"
         android:id="@+id/autoCompleteSource"
         android:padding="5dip"
@@ -18,6 +20,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteDest"
+        android:textColorHint="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Destination"
@@ -106,6 +109,20 @@
 
     </LinearLayout>
     </HorizontalScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Picture of the item to be sent"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:src="@drawable/picture"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/imVPostPicture" />
 
     <Button
         android:layout_width="50dp"

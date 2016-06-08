@@ -28,4 +28,5 @@
     <string name="title_activity_activity_accepted">activity_accepted</string>
     <string name="title_activity_activity_rejected">Sorry</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="URL">http://192.168.137.1</string>
 </resources>

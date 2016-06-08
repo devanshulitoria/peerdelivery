@@ -16,10 +16,15 @@
         android:layout_marginTop="25dp"
         android:gravity="center"
         android:theme="@style/AppTheme"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLength="15" />
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteDest"
+        android:singleLine="true"
+        android:lines="1"
         android:textColorHint="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +33,9 @@
         android:textColor="#ffffff"
         android:layout_marginTop="25dp"
         android:gravity="center"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:maxLines="1"
+        android:maxLength="15" />
 
     <HorizontalScrollView
         android:layout_width="fill_parent"
@@ -62,7 +69,7 @@
             <RadioButton
                 android:id="@+id/radioBooks"
 
-                android:tag="books"
+                android:tag="B"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/booksxml"
@@ -74,7 +81,7 @@
                 android:id="@+id/radioClothes"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:tag="clothes"
+                android:tag="C"
 
                 android:layout_marginRight="10dp"
                 android:background="@drawable/clothesxml"
@@ -85,7 +92,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginRight="10dp"
-                android:tag="electronics"
+                android:tag="E"
                 android:background="@drawable/electronicsxml"
                 android:button="@android:color/transparent"/>
             <RadioButton
@@ -93,7 +100,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginRight="10dp"
-                android:tag="medicines"
+                android:tag="M"
                 android:background="@drawable/medicinesxml"
                 android:button="@android:color/transparent"/>
             <RadioButton
@@ -101,7 +108,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginRight="10dp"
-                android:tag="household"
+                android:tag="H"
                 android:background="@drawable/householdxml"
                 android:button="@android:color/transparent"/>
 
@@ -114,7 +121,8 @@
         android:layout_height="wrap_content"
         android:text="Picture of the item to be sent"
         android:textColor="@android:color/white"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
 
     <ImageView
         android:layout_width="100dp"

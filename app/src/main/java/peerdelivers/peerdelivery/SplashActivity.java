@@ -18,6 +18,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,12 +32,14 @@ public class SplashActivity extends AppCompatActivity {
     SharedPreferences cookies;
     String fbID,auth_code,phNumber;
     SharedPreferences sharedpreferences;
-    final String URL="http://192.168.137.1/splashActivity.php";
+    String URL;
     RequestParams params;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        URL=getResources().getString(R.string.URL)+"/splashActivity.php";
+        Log.e("Connecting to:", URL);
         cookies = this.getSharedPreferences("cookies", Context.MODE_PRIVATE);
         view = (WebView) findViewById(R.id.myWebView);
         view.loadUrl("file:///android_asset/screen.gif");
@@ -105,6 +108,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 // called before request is started
+                Log.e("SplashActivity:","http started");
 
             }
 
@@ -113,6 +117,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject obj) {
                 // called when response HTTP status is "200 OK"
                 String s = null;
+
                 Log.e("http response", obj.toString());
                 try {
                     s = obj.getString("sessionId").toString();
@@ -133,13 +138,13 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.e("http response", s);
+
                 view.setVisibility(View.GONE);
 
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject errorResponse) {
+            public void onFailure(int statusCode, Header[] headers,  String errorResponse,Throwable e) {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 Log.e("http failure", e.toString());
             }

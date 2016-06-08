@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     static Context ct;
     SharedPreferences cookies;
     long msG_ID;
-    final String URL="http://192.168.137.1/MainActivity.php";
+    String URL;
     RequestParams params;
    ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        URL=getResources().getString(R.string.URL)+"/MainActivity.php";
         cookies = this.getSharedPreferences("cookies", Context.MODE_PRIVATE);
         session_id=cookies.getString("phpID","0");
         if (savedInstanceState == null) {

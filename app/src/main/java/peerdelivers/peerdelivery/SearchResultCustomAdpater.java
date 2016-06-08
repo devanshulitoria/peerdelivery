@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,17 +43,25 @@ public class SearchResultCustomAdpater extends ArrayAdapter<HashMap<String,Strin
         nHeading = (TextView) rowView.findViewById(R.id.dest_source);
         nTime= (TextView) rowView.findViewById(R.id.doj);
         nContent=(TextView) rowView.findViewById(R.id.user_name);
-        //ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
+        String picURL=searchList.get(position).get("profilePicURL").toString();
+        Picasso.with(context).load(picURL).into(imageView);
         str=searchList.get(position).get("content").toString();
-        //nHeading.setText(str);
+        String not_time = searchList.get(position).get("time").toString();
+        String not_heading = searchList.get(position).get("name").toString();
+
+        nHeading.setText(not_heading);
+        nTime.setText(not_time);
+        nContent.setText(str);
+
         nHeading.setTypeface(custom_font);
         nTime.setTypeface(custom_font);
         nContent.setTypeface(custom_font);
 //        String not_id = notificationList.get(position).get("id").toString();
 //        String not_type = notificationList.get(position).get("type").toString();
-//        String not_heading = notificationList.get(position).get("heading").toString();
+//
 //        String not_content = notificationList.get(position).get("content").toString();
-//        String not_time = notificationList.get(position).get("time").toString();
+//
 
         return rowView;
     }

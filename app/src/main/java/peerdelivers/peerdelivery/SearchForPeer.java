@@ -35,6 +35,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.loopj.android.http.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,18 +61,16 @@ import cz.msebera.android.httpclient.protocol.HttpContext;
  */
 public class SearchForPeer extends AppCompatActivity {
     Button Search;
-        private RadioGroup itemRadioGroup;
-        private RadioButton itemRadioButton;
+    private RadioGroup itemRadioGroup;
+    private RadioButton itemRadioButton;
     private static final String LOG_TAG = "PostSample";
     static HashMap<String,Integer> hmCities;
     static String[] cities={
-            "North and Middle Andaman" ,
-            "South Andaman" ,
+            "Andaman" ,
             "Nicobar" ,
             "Adilabad" ,
             "Anantapur" ,
             "Chittoor" ,
-            "East Godavari" ,
             "Guntur" ,
             "Hyderabad" ,
             "Kadapa" ,
@@ -90,18 +89,16 @@ public class SearchForPeer extends AppCompatActivity {
             "Vishakhapatnam" ,
             "Vizianagaram" ,
             "Warangal" ,
-            "West Godavari" ,
-            
+            "Godavari" ,
             "Anjaw" ,
             "Changlang" ,
-            "East Kameng" ,
             "Lohit" ,
             "Lower Subansiri" ,
             "Papum Pare" ,
             "Tirap" ,
             "Dibang Valley" ,
             "Upper Subansiri" ,
-            "West Kameng" ,
+            "Kameng" ,
             
             "Barpeta" ,
             "Bongaigaon" ,
@@ -121,7 +118,7 @@ public class SearchForPeer extends AppCompatActivity {
             "Marigaon" ,
             "Nagaon" ,
             "Nalbari" ,
-            "North Cachar Hills" ,
+            "Cachar Hills" ,
             "Sibsagar" ,
             "Sonitpur" ,
             "Tinsukia" ,
@@ -183,20 +180,10 @@ public class SearchForPeer extends AppCompatActivity {
             
             "Diu" ,
             "Daman" ,
-            
-            "Central Delhi" ,
-            "East Delhi" ,
             "New Delhi" ,
-            "North Delhi" ,
-            "North East Delhi" ,
-            "North West Delhi" ,
-            "South Delhi" ,
-            "South West Delhi" ,
-            "West Delhi" ,
+
             
-            "North Goa" ,
-            "South Goa" ,
-            
+            "Goa" ,
             "Ahmedabad" ,
             "Amreli District" ,
             "Anand" ,
@@ -294,7 +281,6 @@ public class SearchForPeer extends AppCompatActivity {
             "Seraikela and Kharsawan" ,
             "Pashchim Singhbhum" ,
             "Ramgarh" ,
-            
             "Bidar" ,
             "Belgaum" ,
             "Bijapur" ,
@@ -426,25 +412,19 @@ public class SearchForPeer extends AppCompatActivity {
             "Wardha" ,
             "Washim" ,
             "Yavatmal" ,
-            
             "Bishnupur" ,
             "Churachandpur" ,
             "Chandel" ,
-            "Imphal East" ,
+            "Imphal" ,
             "Senapati" ,
             "Tamenglong" ,
             "Thoubal" ,
             "Ukhrul" ,
-            "Imphal West" ,
-            
-            "East Garo Hills" ,
-            "East Khasi Hills" ,
+            "Garo Hills" ,
+            "Khasi Hills" ,
             "Jaintia Hills" ,
             "Ri-Bhoi" ,
-            "South Garo Hills" ,
-            "West Garo Hills" ,
-            "West Khasi Hills" ,
-            
+            "Garo Hills" ,
             "Aizawl" ,
             "Champhai" ,
             "Kolasib" ,
@@ -493,12 +473,10 @@ public class SearchForPeer extends AppCompatActivity {
             "Sambalpur" ,
             "Subarnapur" ,
             "Sundargarh" ,
-            
             "Karaikal" ,
             "Mahe" ,
             "Puducherry" ,
             "Yanam" ,
-            
             "Amritsar" ,
             "Bathinda" ,
             "Firozpur" ,
@@ -516,7 +494,6 @@ public class SearchForPeer extends AppCompatActivity {
             "Patiala" ,
             "Rupnagar" ,
             "Sangrur" ,
-            
             "Ajmer" ,
             "Alwar" ,
             "Bikaner" ,
@@ -550,12 +527,7 @@ public class SearchForPeer extends AppCompatActivity {
             "Sirohi" ,
             "Tonk" ,
             "Udaipur" ,
-            
-            "East Sikkim" ,
-            "North Sikkim" ,
-            "South Sikkim" ,
-            "West Sikkim" ,
-            
+            "Sikkim" ,
             "Ariyalur" ,
             "Chennai" ,
             "Coimbatore" ,
@@ -586,12 +558,8 @@ public class SearchForPeer extends AppCompatActivity {
             "Tiruvannamalai" ,
             "Vellore" ,
             "Villupuram" ,
-            
             "Dhalai" ,
-            "North Tripura" ,
-            "South Tripura" ,
-            "West Tripura" ,
-            
+            "Tripura" ,
             "Almora" ,
             "Bageshwar" ,
             "Chamoli" ,
@@ -605,7 +573,6 @@ public class SearchForPeer extends AppCompatActivity {
             "Tehri Garhwal" ,
             "Udham Singh Nagar" ,
             "Uttarkashi" ,
-            
             "Agra" ,
             "Allahabad" ,
             "Aligarh" ,
@@ -676,8 +643,8 @@ public class SearchForPeer extends AppCompatActivity {
             "Sultanpur" ,
             "Shravasti" ,
             "Unnao" ,
+            "YASVANTPUR",
             "Varanasi" ,
-            
             "Birbhum" ,
             "Bankura" ,
             "Bardhaman" ,
@@ -700,7 +667,8 @@ public class SearchForPeer extends AppCompatActivity {
     ArrayAdapter adapter;
     String sourceText,DestText;
     AsyncHttpClient client;
-    final String URL="http://192.168.137.1/test64.php";
+    String prevFilePath="";
+    String URL;
     RequestParams params;
         ImageView iv_postImage;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -709,6 +677,8 @@ public class SearchForPeer extends AppCompatActivity {
     private PopupWindow pgallery;
     private RadioGroup itemSort;
     private LinearLayout ll;
+    JSONObject jso=new JSONObject();
+    JSONArray jsa = new JSONArray();
 
 
 
@@ -717,6 +687,7 @@ public class SearchForPeer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        URL=getResources().getString(R.string.URL)+"/SearchForPeer.php";
         hashmapCities();
         ll=(LinearLayout)findViewById(R.id.ll_search_for_peer);
        itemRadioGroup = (RadioGroup) findViewById(R.id.radioGroupitems);
@@ -762,19 +733,44 @@ public class SearchForPeer extends AppCompatActivity {
             public void onClick(View view) {
                 int selectedId = itemRadioGroup.getCheckedRadioButtonId();
                 itemRadioButton = (RadioButton) findViewById(selectedId);
-                if (preCheckBeforeSending()) {
-                    //sendPOSTRequest("devanshu");
+                String errorMsg=null;
+                int checkID=0;
+                checkID=preCheckBeforeSending();
+                if (checkID==0 || checkID==5) {
+                    try {
+                        jso.put("source", source.getText().toString().trim().toUpperCase());
+                        jso.put("destination", destination.getText().toString().trim().toUpperCase());
+                        jso.put("item", itemRadioButton.getTag().toString().trim().toUpperCase());
+                        jsa.put(0,jso);
+                        Log.e("SearchForpeer", jsa.toString());
+                        if(checkID!=5)
+                        postImageToServer();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     Intent a = new Intent(SearchForPeer.this, SearchResult.class);
-                    a.putExtra("from", source.getText().toString().trim().toUpperCase());
-                    a.putExtra("to", destination.getText().toString().trim().toUpperCase());
+                    a.putExtra("source", source.getText().toString().trim().toUpperCase());
+                    a.putExtra("destination", destination.getText().toString().trim().toUpperCase());
                     a.putExtra("item", itemRadioButton.getTag().toString().trim().toUpperCase());
                     startActivity(a);
-                } else {
-                    Toast.makeText(getBaseContext(), "You choose wrong source and Destination",
-                            Toast.LENGTH_LONG).show();
+                } else if(checkID==1) {
+                    errorMsg="Source and Destination cannot be the same";
                 }
+                else if(checkID==2) {
+                    errorMsg="Source and Destination does not exists";
+                }
+                else if(checkID==3) {
+                    errorMsg="Picture of the item not selected";
+                } else if(checkID==4) {
+                    errorMsg="Type of item not selected";
+                }
+               if(errorMsg!=null) {
+                   Toast.makeText(getBaseContext(), errorMsg,
+                           Toast.LENGTH_LONG).show();
 
-
+               }
+                errorMsg=null;
             }
         });
          iv_postImage = (ImageView) findViewById(R.id.imVPostPicture);
@@ -901,7 +897,7 @@ public class SearchForPeer extends AppCompatActivity {
         int photoH = bmOptions.outHeight;
 
         // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
 
         // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
@@ -910,13 +906,16 @@ public class SearchForPeer extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
 
-        postImageToServer();
+
 
         iv_postImage.setImageBitmap(bitmap);
     }
     public void postImageToServer(){
+
         File myFile = new File(mCurrentPhotoPath);
         RequestParams params = new RequestParams();
+        String sessionId=GetSessionCookie.getCookie(getApplicationContext());
+        params.put("data",jsa.toString());
         try {
             params.put("picture_item", myFile);
         }catch(FileNotFoundException e) {
@@ -925,7 +924,10 @@ public class SearchForPeer extends AppCompatActivity {
         AsyncHttpClient myClient1;
         myClient1 = new AsyncHttpClient();
 
-        //myClient1.addHeader("Content-Type", "image/jpg");
+        if(!sessionId.equalsIgnoreCase("0")) {
+            Log.e("SearchForPeer",sessionId);
+            myClient1.addHeader("Cookie", "PHPSESSID=" + sessionId + "");
+        }
 
         myClient1.post(URL, params, new TextHttpResponseHandler() {
 
@@ -996,13 +998,12 @@ public class SearchForPeer extends AppCompatActivity {
             else
                 mCurrentPhotoPath = RealPathUtil.getRealPathFromURI_API19(this, data.getData());
 
-            Log.e("gallery path::",mCurrentPhotoPath);
+            Log.e("gallery path::", mCurrentPhotoPath);
             try {
                 //Getting the Bitmap from Gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 //Setting the Bitmap to ImageView
                 iv_postImage.setImageBitmap(bitmap);
-               postImageToServer();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -1010,17 +1011,7 @@ public class SearchForPeer extends AppCompatActivity {
 
         }
     }
-    public  String getPath( Uri uri ) {
-        String result = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query( uri, proj, null, null, null );
-        if ( cursor.moveToFirst( ) ) {
-            int column_index = cursor.getColumnIndexOrThrow( MediaStore.Images.Media.DATA );
-            result = cursor.getString( column_index );
-        }
-        cursor.close( );
-        return result;
-    }
+
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -1035,15 +1026,31 @@ public static void hashmapCities(){
     }
 
 }
-    private boolean preCheckBeforeSending() {
-        if(source.getText().toString().equalsIgnoreCase(destination.getText().toString())&& (source.getText().toString()!=null) && (destination.getText().toString()!=null)){
-            return false;
+    private int preCheckBeforeSending() {
+        Log.e("current photo path",mCurrentPhotoPath);
+        Log.e("previous photo path",prevFilePath);
+        if(source.getText().toString().equalsIgnoreCase(destination.getText().toString())&& (source.getText().toString()==null) && (destination.getText().toString()==null)){
+            return 1;
         }
-        else if(!(hmCities.containsKey(source.getText().toString().trim().toUpperCase())&& hmCities.containsKey(destination.getText().toString().trim().toUpperCase())) && (itemRadioButton.getTag().toString()!=null)){
-            return false;
+        else if(!(hmCities.containsKey(source.getText().toString().trim().toUpperCase()))&& !(hmCities.containsKey(destination.getText().toString().trim().toUpperCase()))){
+            return 2;
+        }
+        else if(mCurrentPhotoPath==null){
+            return 3;
+        }
+        else if((itemRadioButton.getTag().toString()==null)){
+            return 4;
+        }
+
+        else if(mCurrentPhotoPath.equalsIgnoreCase(prevFilePath)){
+
+            prevFilePath=mCurrentPhotoPath;
+            return 5;
         }
         else
-        return true;
+        return 0;
+
+
     }
 
     @Override

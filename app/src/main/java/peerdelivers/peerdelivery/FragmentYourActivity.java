@@ -45,7 +45,7 @@ public class FragmentYourActivity extends ListFragment implements AdapterView.On
     SharedPreferences smsSharedPreferences;
     Filtering ft=new Filtering();
     private CustomAdapter travelList;
-    final String URL="http://192.168.137.1/FragmentYourActivity.php";
+    String URL;
     String session_id;
     private CustomAdapter nca;
     ListView tListView;
@@ -66,7 +66,7 @@ public class FragmentYourActivity extends ListFragment implements AdapterView.On
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        URL=getResources().getString(R.string.URL)+"/FragmentYourActivity.php";
        getSMS(getContext());
 //        hm= new LinkedList<HashMap<String, String>>();
 //        HashMap<String,String> tDetail=new HashMap<String,String>();

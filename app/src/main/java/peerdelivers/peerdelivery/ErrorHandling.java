@@ -10,6 +10,7 @@ public class ErrorHandling {
     public static void initializing() {
         errors.put("SC01", "User not logged in");
         errors.put("MN01", "Error in Insertion! User already exists");
+        errors.put("MN02","This app is device locked.You cannot login in with another facebook ID");
         errors.put("SP01", "Invalid User!Intrusion Detected");
     }
     public static String displayError(String errCode){

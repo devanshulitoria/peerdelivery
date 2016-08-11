@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "1094213830205",
+    "project_id": "peerdelivery-1997d"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094213830205:android:a7ac02fc092248c3",
+        "android_client_info": {
+          "package_name": "peerdelivers.peerdelivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzRCTDyQY9jt8qg5rEYSl35tltQ46_ZUs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-35279173-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

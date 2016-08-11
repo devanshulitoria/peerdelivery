@@ -14,9 +14,6 @@ public class CheckPreferences {
         SharedPreferences sharedpreferences;
         sharedpreferences = context.getSharedPreferences("user_id", Context.MODE_PRIVATE);
         Log.e("CheckPref", String.valueOf(sharedpreferences.getLong("phNumber", 0)));
-        Toast.makeText(context,
-                "CheckPref:"+String.valueOf(sharedpreferences.getLong("phNumber", 0)), Toast.LENGTH_LONG)
-                .show();
         if(sharedpreferences.getLong("phNumber", 0)==0) {
 
             return false;

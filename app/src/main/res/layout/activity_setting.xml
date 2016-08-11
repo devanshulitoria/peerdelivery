@@ -1,0 +1,179 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@android:color/black"
+    tools:context="peerdelivers.peerdelivery.activity_setting">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:fontFamily="sans-serif-thin"
+        android:id="@+id/tv_noti"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="25sp"
+        android:layout_margin="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:fontFamily="sans-serif-thin"
+        android:layout_height="wrap_content"
+        android:text="Receive Notifications via email"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:id="@+id/textView16"
+        android:layout_below="@+id/tv_noti"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:cursorVisible="true"
+        android:textColor="@android:color/white"
+        android:id="@+id/switch_noti"
+        android:layout_below="@+id/tv_noti"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default weights you can carry"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="25sp"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/textView16"
+        android:layout_alignLeft="@+id/textView16"
+        android:layout_alignStart="@+id/textView16"
+        android:layout_marginTop="43dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Airplane"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/textView17"
+        android:layout_alignLeft="@+id/textView17"
+        android:layout_alignStart="@+id/textView17"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@android:color/white"
+        android:id="@+id/tv_airplane"
+        android:layout_margin="5dp"
+        android:hint="2"
+        android:layout_alignTop="@+id/textView18"
+        android:layout_alignRight="@+id/switch_noti"
+        android:layout_alignEnd="@+id/switch_noti"
+        android:numeric="signed|integer"
+        android:maxLength="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Train"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:id="@+id/textView19"
+        android:fontFamily="sans-serif-thin"
+        android:layout_below="@+id/tv_airplane"
+        android:layout_alignLeft="@+id/textView18"
+        android:layout_alignStart="@+id/textView18"
+        android:layout_marginTop="35dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:textColor="@android:color/white"
+        android:id="@+id/tv_train"
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="5dp"
+        android:layout_alignTop="@+id/textView19"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:numeric="signed|integer"
+        android:maxLength="1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bus"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:id="@+id/textView20"
+        android:layout_below="@+id/tv_train"
+        android:layout_marginTop="35dp"
+        android:layout_alignLeft="@+id/textView19"
+        android:layout_alignStart="@+id/textView19" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:numeric="signed|integer"
+        android:maxLength="1"
+        android:fontFamily="sans-serif-thin"
+        android:layout_margin="5dp"
+        android:textColor="@android:color/white"
+        android:id="@+id/tv_bus"
+        android:layout_alignTop="@+id/textView20"
+        android:layout_alignRight="@+id/tv_train"
+        android:layout_alignEnd="@+id/tv_train" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your profile status"
+        android:id="@+id/textView27"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="25sp"
+        android:layout_below="@+id/tv_bus"
+        android:layout_alignLeft="@+id/textView20"
+        android:layout_alignStart="@+id/textView20" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:id="@+id/edit_status"
+        android:fontFamily="sans-serif-thin"
+        android:layout_below="@+id/textView27"
+        android:layout_alignLeft="@+id/textView27"
+        android:layout_alignStart="@+id/textView27"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/white"
+        android:text="Hey there I am using PeerDelivery"
+        android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

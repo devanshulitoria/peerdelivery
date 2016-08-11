@@ -3,8 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/popup_gallery_linear"
-    android:alpha="0.9"
-    android:background="@android:color/black">
+    android:background="@drawable/blurbackgroud">
 
 
     <TextView
@@ -12,6 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Pick source"
+        android:textColor="@android:color/white"
         android:id="@+id/tv_sort"
         android:layout_gravity="center_horizontal" />
 
@@ -25,20 +25,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:tag="camera"
+            android:button="@drawable/smallcamera"
             android:textColor="@android:color/white"
             android:text="Camera"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:padding="5dp"
             />
-        <RadioButton
-            android:id="@+id/gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:layout_marginRight="10dp"
-            android:tag="gallery"
-            android:text="Gallery"
-            />
+
+
+    <RadioButton
+        android:id="@+id/gallery"
+        android:layout_width="wrap_content"
+        android:button="@drawable/smallpicture"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:tag="gallery"
+        android:text="Gallery"
+        android:layout_gravity="center_horizontal" />
 
     </RadioGroup>
 

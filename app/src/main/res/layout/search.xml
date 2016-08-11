@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="fill_parent"
     android:orientation="vertical"
     android:id="@+id/ll_search_for_peer"
-    android:background="@drawable/backgroud2">
+    android:background="@android:color/black">
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="@android:color/white"
         android:hint="Enter Source"
+        android:fontFamily="sans-serif-thin"
         android:id="@+id/autoCompleteSource"
         android:padding="5dip"
         android:textColor="#ffffff"
@@ -20,17 +22,24 @@
         android:singleLine="true"
         android:lines="1"
         android:maxLength="15" />
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:id="@+id/bt_change"
+        android:background="@drawable/change"/>
 
     <AutoCompleteTextView
         android:id="@+id/autocompleteDest"
         android:singleLine="true"
         android:lines="1"
+        android:fontFamily="sans-serif-thin"
         android:textColorHint="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter Destination"
-        android:padding="5dip"
-        android:textColor="#ffffff"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
         android:layout_marginTop="25dp"
         android:gravity="center"
         android:background="@android:color/transparent"
@@ -51,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Item is:"
+            android:fontFamily="sans-serif-thin"
             android:textColor="@android:color/white"
             android:layout_margin="5dp"
             android:layout_marginTop="25dp"
@@ -116,21 +126,7 @@
 
     </LinearLayout>
     </HorizontalScrollView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Picture of the item to be sent"
-        android:textColor="@android:color/white"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp" />
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="200dp"
-        android:src="@drawable/picture"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:id="@+id/imVPostPicture" />
 
     <Button
         android:layout_width="50dp"
@@ -138,9 +134,7 @@
         android:background="@drawable/search"
         android:id="@+id/b_searchPeer"
         android:layout_margin="5dp"
-        android:layout_marginTop="25dp"
-        android:layout_gravity="right" />
-
-
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center" />
 
 </LinearLayout>

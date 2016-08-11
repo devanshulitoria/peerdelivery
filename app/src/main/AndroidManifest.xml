@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="peerdelivers.peerdelivery" >
+    package="peerdelivers.peerdelivery"
+    android:versionCode="6"
+    android:versionName="1.5" >
 
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -11,18 +13,28 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.READ_PHONE_STATE" >
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
     </uses-permission>
-    <uses-feature android:name="android.hardware.camera"
-        android:required="true" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1088228601233560"
+            android:exported="true" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -33,9 +45,17 @@
         </activity>
         <activity
             android:name=".PreStart"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name" >
         </activity>
+
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <!-- Accepts URIs "com.example.myapp://" -->
+            <data android:scheme="peerdelivers.peerdelivery" />
+        </intent-filter>
 
         <receiver android:name=".IncomingSms" >
             <intent-filter android:priority="999" >
@@ -49,25 +69,26 @@
         </receiver>
         <receiver
             android:name=".MyAlarmReceiver"
-            android:enabled="true"
-            android:process=":remote" >
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="uk.ac.shef.oak.ActivityRecognition.RestartSensor" />
+            </intent-filter>
         </receiver>
 
         <service
             android:name=".NotifyService"
-            android:exported="false" />
+            android:enabled="true"
+            android:exported="false"
+            android:icon="@mipmap/icon"
+            android:label="NotifyService" />
 
         <activity
             android:name=".SearchForPeer"
-            android:label="@string/title_activity_search_for_peer" >
+            android:label="Send your items" >
         </activity>
         <activity
             android:name=".about"
             android:label="@string/title_activity_about" >
-        </activity>
-        <activity
-            android:name=".preMain"
-            android:label="@string/title_activity_pre_main" >
         </activity>
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -89,12 +110,7 @@
 
         <activity
             android:name=".CarrierActivity"
-            android:label="@string/title_activity_carrier"
-            android:theme="@style/MyMaterialTheme" >
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/title_activity_carrier" >
         </activity>
         <activity
             android:name=".SearchResult"
@@ -115,11 +131,45 @@
         <activity
             android:name=".SplashActivity"
             android:label="Peer Delivery"
-            android:theme="@style/MyMaterialTheme">
+            android:theme="@style/MyMaterialTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Requested"
+            android:label="@string/title_activity_requested" >
+        </activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="382a68f1c12439b424794db33834567efe94059e" />
+
+        <activity
+            android:name=".Improve"
+            android:label="@string/title_activity_improve" >
+        </activity>
+        <activity
+            android:name=".activity_setting"
+            android:label="@string/title_activity_activity_setting" >
+        </activity>
+        <activity
+            android:name=".activity_faq"
+            android:label="FAQs" >
+        </activity>
+        <activity
+            android:name=".profile"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name=".NewTrip"
+            android:label="Add a new journey" >
+        </activity>
+        <activity
+            android:name=".Friends"
+            android:label="@string/title_activity_friends" >
         </activity>
     </application>
 

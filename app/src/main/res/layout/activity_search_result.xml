@@ -3,16 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="8dp"
-    android:background="@drawable/background"
+    android:background="@android:color/black"
     android:orientation="vertical"
     android:id="@+id/ll_search_activity">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@android:color/holo_orange_dark">
+        android:layout_height="55dp"
+        android:background="@android:color/holo_green_dark">
 
 
         <Button
@@ -23,6 +22,11 @@
             android:background="@android:color/transparent"
             android:layout_weight="1"
             android:id="@+id/filter" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/divderwhite"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -32,13 +36,33 @@
             android:layout_weight="1"
             android:id="@+id/sort" />
     </LinearLayout>
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/message_no_one"
+    android:text="We are very sorry that there are none of your friends travelling on this route. But don't worry we'll keep you informed"
+    android:textColor="@android:color/white"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_marginTop="10dp"
+    android:textSize="20sp"
+    android:visibility="gone"
+    />
+    <WebView
+        android:id="@+id/myWebView"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lv_search_result"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp"
+        android:dividerHeight="5.0sp"
+        android:drawSelectorOnTop="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp" />
 </LinearLayout>

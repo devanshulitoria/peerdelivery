@@ -1,5 +1,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,14 +9,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
@@ -23,10 +16,33 @@
             app:tabMode="fixed"
             app:tabGravity="fill"/>
     </android.support.design.widget.AppBarLayout>
+    <fragment
+        android:id="@+id/fragment_accepted"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:name="peerdelivers.peerdelivery.FragmentAccepted"
+        tools:layout="@layout/fragment_accepted" />
 
+    <fragment
+        android:id="@+id/fragment_pending"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:name="peerdelivers.peerdelivery.FragmentPending"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_pending" />
+
+    <fragment
+        android:id="@+id/fragment_rejected"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:name="peerdelivers.peerdelivery.FragmentRejected"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_rejected" />
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 </android.support.design.widget.CoordinatorLayout>

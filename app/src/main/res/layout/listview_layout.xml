@@ -1,86 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="#ffebeff1"
-    android:orientation="horizontal" >
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="100dp" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_margin="5dp"
+    android:background="#40535252"
+    tools:context="peerdelivers.peerdelivery.CustomAdapter">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="8dp"
-        android:background="#ffffeb3b"
-        android:id="@+id/audio_object_shareview"
-        android:orientation="horizontal" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/check"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="8dp"
-        android:background="@android:color/transparent"
-        android:id="@+id/audio_object_deleteview"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/delete"/>
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:weightSum="1"
-        android:background="#ffebeff1"
-        android:id="@+id/audio_object_mainview"
-        android:orientation="horizontal"
-        >
+        android:text="Bangalore to New Delhi"
+        android:textColor="@android:color/white"
+        android:id="@+id/dest_source"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/typeImage"
+        android:layout_toEndOf="@+id/typeImage"
+        android:layout_above="@+id/doj" />
 
-        <!-- add views here that you want to show at the top !-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15-March-2016"
+        android:id="@+id/doj"
+        android:textColor="@android:color/holo_green_dark"
 
-            <ImageView
-                android:id="@+id/list_image"
-                android:layout_width="60dip"
-                android:layout_height="60dip"
-                android:src="@drawable/airplane"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BLR->DEL"
-            android:id="@+id/listTextView"
-            android:textSize="10sp"
-            android:layout_marginLeft="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15th-Mar-2016"
-            android:id="@+id/listTextdoj"
-            android:typeface="sans"
-            android:textSize="8sp"
-
-            android:textColor="#4c22ff"
-            android:textAppearance="@android:color/holo_blue_light" />
-
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/typeImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/airplane"
+      />
 
 </RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/notifications"
+            android:checked="false"
+            android:icon="@drawable/notification2"
+            android:title="Notifications" />
+
+        <item
+            android:id="@+id/myrequeststatus"
+            android:checked="false"
+            android:icon="@drawable/myrequeststatus"
+            android:title="My request status" />
+
+        <item
+            android:id="@+id/requestrecieved"
+            android:checked="false"
+            android:icon="@drawable/requestrecieved"
+            android:title="Request Recieved" />
+
+        <item
+            android:id="@+id/sendyouritems"
+            android:checked="false"
+            android:icon="@drawable/send"
+            android:title="Send your items" />
+
+
+        <item
+            android:id="@+id/settings"
+            android:checked="false"
+            android:icon="@drawable/settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+        <item
+            android:id="@+id/about"
+            android:checked="false"
+            android:icon="@drawable/about"
+            android:title="About" />
+        <item
+            android:id="@+id/improve"
+            android:checked="false"
+            android:icon="@drawable/improve"
+            android:title="Improve us" />
+        <item
+            android:id="@+id/faq"
+            android:checked="false"
+            android:icon="@drawable/faq"
+            android:title="FAQs" />
+
+    </group>
+</menu>

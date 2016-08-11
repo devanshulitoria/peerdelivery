@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    tools:context="peerdelivers.peerdelivery.profile">
+
+        <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:id="@+id/rr_lv_travel_details"
+      >
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/lv_search_result"
+            android:drawSelectorOnTop="true"
+            android:dividerHeight="5.0sp"
+            android:layout_below="@+id/textView24"
+             />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Travel Plans"
+                android:id="@+id/textView24"
+                android:layout_margin="5dp"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_below="@+id/rr_profile"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:fontFamily="sans-serif-thin"
+                android:textColor="@android:color/white"
+                android:text="No Travel plans as of now"
+                android:id="@+id/tv_nothing_in_profile"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+            <WebView
+                android:id="@+id/myWebView"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:background="@android:color/transparent"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+</RelativeLayout>

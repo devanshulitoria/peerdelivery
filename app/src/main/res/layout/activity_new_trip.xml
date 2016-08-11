@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context="peerdelivers.peerdelivery.NewTrip">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="950dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/holo_green_dark"
+        android:hint="Travelling from"
+        android:id="@+id/autoCompleteSource"
+        android:padding="5dip"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#ffffff"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:theme="@style/AppTheme"
+        android:background="@android:color/transparent"
+        android:singleLine="true"
+        android:lines="1"
+        android:maxLength="15" />
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+
+        android:id="@+id/bt_change"
+        android:background="@drawable/change"
+        android:layout_below="@+id/autoCompleteSource"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autocompleteDest"
+        android:singleLine="true"
+        android:lines="1"
+        android:fontFamily="sans-serif-thin"
+        android:textColorHint="@android:color/holo_green_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Travelling to"
+        android:padding="5dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:layout_below="@+id/bt_change"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupitems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/autocompleteDest"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:id="@+id/radioTrain"
+
+            android:tag="T"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/trainxml"
+            android:layout_marginRight="10dp"
+            android:button="@android:color/transparent"
+            android:checked="false" />
+
+        <RadioButton
+            android:id="@+id/radioBus"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:tag="B"
+
+            android:layout_marginRight="10dp"
+            android:background="@drawable/busxml"
+            android:padding="5dp"
+            android:button="@android:color/transparent"/>
+        <RadioButton
+            android:id="@+id/radioair"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:tag="F"
+            android:background="@drawable/planexml"
+            android:button="@android:color/transparent"/>
+        <RadioButton
+            android:id="@+id/radiocar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="10dp"
+            android:tag="C"
+            android:background="@drawable/carxml"
+            android:button="@android:color/transparent"/>
+
+    </RadioGroup>
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:fontFamily="sans-serif-thin"
+        android:background="@android:color/white"
+        android:layout_below="@+id/radioGroupitems"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundedbutton"
+            android:text="Add this Travel"
+            android:fontFamily="sans-serif-thin"
+            android:padding="10dp"
+            android:layout_marginTop="100dp"
+            android:drawSelectorOnTop="true"
+            android:textColor="@android:color/white"
+            android:id="@+id/bt_add_travel"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="15sp"
+            android:id="@+id/textView25"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/autocompleteDest"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="20sp"
+            android:layout_marginTop="25dp"
+            android:id="@+id/textView26"
+            android:layout_below="@+id/radioGroupitems"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

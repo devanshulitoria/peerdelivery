@@ -25,14 +25,17 @@ public class NotifyManager{
     public void notifying(HashMap<String,String> data){
         Log.e("inside notify", "devanshu");
         Notification notify = null;
+        String title=data.get("count");
+        String content=data.get("content");
         NotificationManager notif = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification.Builder builder = new Notification.Builder(mContext);
         // Large icon appears on the left of the notification
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.mipmap.icon);
         builder.setTicker("this is ticker text");
-        builder.setContentTitle("New Request");
-        builder.setContentText("You have a new message");
+        builder.setContentTitle(title + " new notifications");
+        builder.setContentText(content);
+        builder.setPriority(Notification.PRIORITY_HIGH);
         //adding LED lights to notification
         builder.setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND | Notification.FLAG_SHOW_LIGHTS);
         builder.setLights(0xff00ff00, 300, 100);

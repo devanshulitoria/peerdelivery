@@ -23,7 +23,8 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Call Mark"
+            android:text="Call"
+            android:drawSelectorOnTop="true"
             android:textColor="@android:color/white"
             android:background="@android:color/holo_green_dark"
             android:id="@+id/bt_call"
@@ -32,18 +33,18 @@
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Text Mark"
+            android:text="Text"
+            android:drawSelectorOnTop="true"
             android:textColor="@android:color/white"
             android:background="@android:color/holo_blue_dark"
             android:layout_weight="1"
             android:id="@+id/bt_text" />
     </LinearLayout>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/iv_profilepic"
-        android:src="@drawable/team"
         android:layout_margin="5dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
@@ -53,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Devanshu Litoria"
+        android:text=""
         android:id="@+id/textView2"
         android:textColor="@android:color/white"
         android:layout_below="@+id/linearLayout"
@@ -64,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Oracle Financial Services"
+        android:text=""
         android:id="@+id/textView3"
         android:textColor="@android:color/white"
         android:layout_below="@+id/textView2"
@@ -75,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Acceptance Probablity : 0.25"
+        android:text=""
         android:id="@+id/textView4"
         android:textColor="@android:color/white"
         android:layout_below="@+id/textView3"
@@ -85,7 +86,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bangalore to Delhi"
+        android:text=""
         android:id="@+id/textView5"
         android:textColor="@android:color/white"
         android:textSize="30sp"
@@ -107,19 +108,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="15th-June-2016"
-        android:textColor="@android:color/white"
+        android:text=""
+        android:textColor="@android:color/holo_green_dark"
         android:id="@+id/tv_doj"
         android:layout_below="@+id/textView6"
         android:layout_centerHorizontal="true"
         />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/iv_type"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/train"
         android:layout_below="@+id/tv_doj"
         />
 
@@ -127,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="PNR:AJQPL78"
+        android:text=""
         android:textColor="@android:color/white"
         android:id="@+id/pnr"
         android:layout_below="@+id/iv_type"
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Congrats Devanshu has accepted to carry your item!"
+        android:text=""
         android:id="@+id/tv_displayMessage"
         android:textSize="30sp"
         android:textColor="@android:color/white"
@@ -145,7 +145,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
         android:gravity="center" />
-
+    <WebView
+        android:id="@+id/myWebView"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:background="@android:color/transparent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
 </ScrollView>

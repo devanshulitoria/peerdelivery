@@ -2,25 +2,172 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\design\24.0.0-alpha2\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.3"
-        sha1="dc88341cbaaac9d67a982378e5df68d8c81289ed">
-        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\debug\classes-48025b5c205cb9c554691aaa947bf39b237e50d9.jar" />
-    </item>
-    <item
-        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.0.0-alpha2\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.3"
-        sha1="2f417d93e1f62fd4fb4a2c0f3a4a882dd0ca7843">
-        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\debug\classes-7363291cef3531422ebe180bc413cb2e59c27774.jar" />
-    </item>
-    <item
         jar="C:\Users\iMac\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
         jumboMode="false"
         revision="23.0.3"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\debug\picasso-2.5.2-3c023f17f923746a3ece60a38a7a3703668eff5e.jar" />
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\picasso-2.5.2-3c023f17f923746a3ece60a38a7a3703668eff5e.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.12\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3575e73a22dce98f0bdbcdb475ef55a84606a9a6">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-fe62f971d43b639f2500e7eef69b978f5600c000.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.facebook.android\facebook-android-sdk\4.11.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="86da97c30f50a67ddabe2cf7040713ad17153fce">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-997a6fcbe21448178aaddc73209693f1d0dc14c3.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-e733abfb8c5b1689ce4cb7a65dd5c54bb6ca16ba.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-54e5d34ba1b14f8c7e1b93b806cc3f3d9d3b290a.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.7\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="2d8334c5cb1948de5dde77f8b72c82991af32f8a">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-8848aa47eb525dd0c4363ae66b66ef1ad779af85.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\.gradle\caches\modules-2\files-2.1\com.loopj.android\android-async-http\1.4.9\386a4339ffe52d5d63e80f9bed8d2b1d1a418249\android-async-http-1.4.9.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\android-async-http-1.4.9-0097a9326ab8a64b90c00465759103bfb5e6d7a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-34a06a8b4af7146843f9d1dca3243e62d03d2f8d.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-6d43c34e3c146fa94a021ef0f631f6eed27fdb21.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8c046c952177602c858ed41c8fc492c939bde9aa">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-5de7e0894b7d800a4d54d96fcbca63778d05f65f.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="cb86970df0f0f25f766d320b279c7858c1ca0003">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-f5e18884f2c1b9409c23e662a80de7b785a59cc1.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-96e6e2d74704125c7dc2e2dc875cac9fa196c5c7.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.8\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="0c46a5a897439810b6c437ce188bd07d9d8dffb0">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-1dfd4ccd3265abd17769201000a150fc9cb554bb.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\bolts-tasks-1.4.0-1e1539433b1eeb47809fe7c3564acadd0a7b4c06.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.2.1\support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\support-annotations-23.2.1-bc01ad602a5dda6f3454512cd8c88fb41710474b.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\.gradle\caches\modules-2\files-2.1\cz.msebera.android\httpclient\4.3.6\526a9f794eab830eae4f23a62c572878b3f491ab\httpclient-4.3.6.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="526a9f794eab830eae4f23a62c572878b3f491ab">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\httpclient-4.3.6-4c14a2a91053862bbcb343aa8be9f1e2d86b0a88.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-8a38eb48dcc6392f51edbf3242e1abee804e2cb4.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\customtabs\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="0e5a66a941515d873a34065fe44fbba6ef422a1b">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-519fb02decd60efd51e2606da1717e0dd0088b0b.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\libs\internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\internal_impl-23.2.1-c3f23311855d769463bbe05f9297a2c10fada334.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a0c456a59e1edab84702b48a626705aa1d830ccc">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\internal_impl-23.0.1-cf8ff447792dcdc718853d1e9b6b250630c76843.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-70633c0cc663747e3bfae08928ef505ce2f11d5b.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.10\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="2f9a9b21b70965cde70f6eb8f2ee68794fb482e6">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-1a10acd2b57c6d40f71b6b6d5f1d018dbd8095cf.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-applinks\1.4.0\8ad21bf21784dacce5f2043afb97218cc377e835\bolts-applinks-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8ad21bf21784dacce5f2043afb97218cc377e835">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\bolts-applinks-1.4.0-424cfc09bf6659dc0d2f004817222783f12952db.jar" />
+    </item>
+    <item
+        jar="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.6\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="0362076a0fa8c125691f759ba4652f11ad31b05a">
+        <dex dex="C:\Users\iMac\AndroidStudioProjects\PeerDelivery\app\build\intermediates\pre-dexed\release\classes-970e92b5c720c5edcf2a3ea2f5adda5e478dde3e.jar" />
     </item>
 
 </items>

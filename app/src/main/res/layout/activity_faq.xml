@@ -1,0 +1,158 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:background="@drawable/blurbackgroud"
+    tools:context="peerdelivers.peerdelivery.activity_faq">
+
+    <TextView android:text="Frequently asked questions" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:fontFamily="sans-serif-thin"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@+id/tv_title">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is PeerDelivery?"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="PeerDelivery is a community driven platform which connects travellers to people who want to send their belongings to the same destination where the traveller is travelling to."
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_height="3dip"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:layout_width="fill_parent"
+            android:background="@android:color/transparent" />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="How do I send my stuff?"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:layout_margin="5dp"
+        android:fontFamily="sans-serif-thin"
+    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:text=" Go to the Home Screen.Click on the hamburger icon.Select 'Search for peer' and you are good to go"
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_height="3dip"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:layout_width="fill_parent"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What happens when I accept the request to carry an item as requested by my friend?"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="As soon as you approve the request to carry your friend's belonging you contact information is shared with him/her"
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_height="3dip"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:layout_width="fill_parent"
+            android:background="@android:color/transparent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is PeerDelivery looking into my personal message?"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="A BIG NO! We don't process any message that isn't related to travel whether its your personal message,Transactional message or OTP."
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_height="3dip"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:layout_width="fill_parent"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is PeerDelivery responsible for damages/theft incurred to my belongings during transit"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_gravity="left"
+            android:layout_margin="5dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="At PeerDelivery we only provide the platforms for users to interact with each before sending sending their belongings through them. Damages/Thefts are outside the realms of PeerDelivery. PeerDelivery will not be responsible for the theft/damages incurred to your item during transit.The responsibilty solely lies on the sender"
+            android:textColor="@android:color/white"/>
+
+        <View
+            android:layout_height="3dip"
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:layout_width="fill_parent"
+            android:background="@android:color/transparent" />
+
+
+    </LinearLayout>
+</ScrollView>
+</RelativeLayout>

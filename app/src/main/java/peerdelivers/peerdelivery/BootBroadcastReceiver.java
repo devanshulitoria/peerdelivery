@@ -11,8 +11,7 @@ public class BootBroadcastReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent startServiceIntent = new Intent(context, NotifyService.class);
-        startWakefulService(context, startServiceIntent);
-        // Release the wake lock provided by the WakefulBroadcastReceiver.
-        WakefulBroadcastReceiver.completeWakefulIntent(intent);
+        context.startService(startServiceIntent);
+
     }
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/popup_gallery_linear"
+    android:background="@drawable/blurbackgroud"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="We see you have rejected to carry..We were wondering why?"
+        android:id="@+id/tv_sort"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:id="@+id/radioSort"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1"
+            android:textColor="@android:color/white"
+            android:text="I am no more taking this journey."
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            />
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:tag="2"
+            android:text="I don't know this person."
+            />
+        <RadioButton
+            android:id="@+id/rb_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:tag="3"
+            android:text="I am simply not interested."
+            />
+        <RadioButton
+            android:id="@+id/rb_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:tag="4"
+            android:text="I can't carry this particular item."
+            />
+    </RadioGroup>
+
+</LinearLayout>

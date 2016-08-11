@@ -1,6 +1,6 @@
 package peerdelivers.peerdelivery;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,24 +20,16 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Arrays;
 
 public class FacebookLogin extends AppCompatActivity {
     LoginButton loginButton;
-    CallbackManager callbackManager;
-    String tempdata="kela kela";
+    CallbackManager callbackManager;;
     TextView tv;
     String phNumber,auth_code;
     Typeface custom_font;
@@ -46,6 +39,15 @@ public class FacebookLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PreStart.inst.finish();
+//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getSupportActionBar().hide();
+//        ComponentName receiver = new ComponentName(getApplication(), IncomingSms.class);
+//        PackageManager pm = getPackageManager();
+//
+//        pm.setComponentEnabledSetting(receiver,
+//                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+//                PackageManager.DONT_KILL_APP);
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
@@ -61,6 +63,8 @@ public class FacebookLogin extends AppCompatActivity {
             phNumber= (String) savedInstanceState.getSerializable("phNumber");
             auth_code= (String) savedInstanceState.getSerializable("auth_code");
         }
+        //<// TODO: 6/24/2016
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager=CallbackManager.Factory.create();
         setContentView(R.layout.activity_facebook_login);
@@ -96,8 +100,8 @@ public class FacebookLogin extends AppCompatActivity {
                 Intent i = new Intent(FacebookLogin.this, MainActivity.class);
                 i.putExtra("fbToken",fbAccessToken);
                 //<// TODO: 5/28/2016  start
-                phNumber="+919706783069";
-                auth_code="ascd-55er-5fbg-qwer7-258fr";
+               // phNumber="+919706783069";
+                //auth_code="ascd-55er-5fbg-qwer7-258fr";
                 i.putExtra("phNumber",phNumber);
                 i.putExtra("auth_code", auth_code);
                 //// TODO: 5/28/2016  end
@@ -155,12 +159,7 @@ public class FacebookLogin extends AppCompatActivity {
         //Log.e(data.getComponent().getClassName(),"intent data facebook");
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_facebook_login, menu);
-        return true;
-    }
+
     private void updateWithToken(AccessToken currentAccessToken) {
 
         if (currentAccessToken != null) {
@@ -189,20 +188,6 @@ public class FacebookLogin extends AppCompatActivity {
                 }
             }, 100000);
         }
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onDestroy() {

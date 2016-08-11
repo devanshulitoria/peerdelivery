@@ -2,6 +2,8 @@ package peerdelivers.peerdelivery;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
@@ -12,17 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -46,43 +48,64 @@ public class SearchResult extends AppCompatActivity {
     private List<HashMap<String,String>> hm;
     private SearchResultCustomAdpater nca;
     Button filter,sort;
-    String source,destination;
+    String source,destination,item,noti_id;
     private PopupWindow psort,pfilter;
     private RadioGroup itemSort;
     private RadioGroup itemFilter;
+    static boolean completed=false;
     private LinearLayout ll;
+    TextView noOne;
     String URL;
+    WebView viewWeb;
+    Typeface custom_font;
+    String gender="A";
+    String filterSelected="ASC";
     AsyncHttpClient client;
     RequestParams params;
     JSONArray peoples = null;
     JSONObject jso=new JSONObject();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+        custom_font = Typeface.createFromAsset(getAssets(), "fonts/myriad-set-pro_thin.ttf");
+        noOne=(TextView) findViewById(R.id.message_no_one);
+        noOne.setTypeface(custom_font);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         CheckConnection.isConnected(getApplicationContext(), SearchResult.this);
+        viewWeb = (WebView)findViewById(R.id.myWebView);
+        viewWeb.loadUrl("file:///android_asset/screen.gif");
+        viewWeb.setBackgroundColor(Color.TRANSPARENT);
+        viewWeb.setVisibility(View.VISIBLE);
         URL=getResources().getString(R.string.URL)+"/SearchResult.php";
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 source= null;
                 destination=null;
+                item=null;
+                noti_id=null;
 
 
 
             } else {
                 source= extras.getString("source");
                 destination= extras.getString("destination");
+                item=extras.getString("item");
+                noti_id=extras.getString("noti_id");
 
 
             }
         } else {
             source= (String) savedInstanceState.getSerializable("source");
             destination= (String) savedInstanceState.getSerializable("destination");
+            item= (String) savedInstanceState.getSerializable("item");
+            noti_id= (String) savedInstanceState.getSerializable("noti_id");
         }
-        if(source!=null && destination!=null){
-            FetchSearchResultFromServer();
-
+        if(source!=null && destination!=null && item!=null){
+            FetchSearchResultFromServer("all");
         }
         filter=(Button)findViewById(R.id.filter);
         ll=(LinearLayout)findViewById(R.id.ll_search_activity);
@@ -104,9 +127,20 @@ public class SearchResult extends AppCompatActivity {
 
         });
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     public void populateListview(){
         serverNotificatioLV=(ListView) findViewById(R.id.lv_search_result);
         nca=new SearchResultCustomAdpater(SearchResult.this,hm);
+
         nca.setListView(serverNotificatioLV);
         serverNotificatioLV.setAdapter(nca);
         serverNotificatioLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,13 +151,16 @@ public class SearchResult extends AppCompatActivity {
                        Log.e("listItem", parent.getItemAtPosition(position).toString());
                 Map<String, Object> map = (Map<String, Object>)parent.getItemAtPosition(position);
                 String travel_id=(String)map.get("travel_id");
-                Log.e("travel_id",travel_id);
+                Log.e("travel_id", travel_id);
                 Intent a = new Intent(SearchResult.this, Result.class);
                 a.putExtra("travel_id", travel_id);
+                a.putExtra("source", source);
+                a.putExtra("destination", destination);
+                a.putExtra("item_type", item);
                 startActivity(a);
+                }
 
 
-            }
         });
     }
     private void initiatePopupWindowFilter() {
@@ -140,21 +177,23 @@ public class SearchResult extends AppCompatActivity {
             itemFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    String selected="all";
-                    switch(checkedId)
-                    {
+                    String selected = "A";
+                    switch (checkedId) {
                         case R.id.male:
-                            selected="male";
+                            selected = "M";
                             break;
                         case R.id.female:
-                            selected="female";
+                            selected = "F";
                             break;
                         case R.id.all:
-                            selected="all";
+                            selected = "A";
                             break;
                     }
                     Toast.makeText(getBaseContext(), selected,
                             Toast.LENGTH_LONG).show();
+                    gender=selected;
+                    nca.clear();
+                    FetchSearchResultFromServer(selected);
                     pfilter.dismiss();
                 }
             });
@@ -184,14 +223,17 @@ public class SearchResult extends AppCompatActivity {
                     switch(checkedId)
                     {
                         case R.id.dateAsc:
-                            selected="dateAsc";
+                            selected="ASC";
                             break;
                         case R.id.dateDesc:
-                            selected="dateDesc";
+                            selected="DESC";
                             break;
                     }
                     Toast.makeText(getBaseContext(), selected,
                             Toast.LENGTH_LONG).show();
+                    filterSelected=selected;
+                    nca.clear();
+                    FetchSearchResultFromServer(selected);
                     psort.dismiss();
                 }
             });
@@ -202,28 +244,10 @@ public class SearchResult extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_result, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
-    private void FetchSearchResultFromServer(){
+    public  void FetchSearchResultFromServer(String bt_option){
         String sessionId=GetSessionCookie.getCookie(getApplicationContext());
         client = new AsyncHttpClient();
         params=new RequestParams();
@@ -232,6 +256,10 @@ public class SearchResult extends AppCompatActivity {
         try {
             jso.put("source",source);
             jso.put("destination", destination);
+            jso.put("item", item);
+            jso.put("noti_id", noti_id);
+            jso.put("gender", gender);
+            jso.put("filter", filterSelected);
             params.put("data",jso.toString());
             Log.e("JSON output",jso.toString());
         } catch (JSONException e) {
@@ -250,6 +278,7 @@ public class SearchResult extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String obj) {
             Log.e("SearchforResult",obj.toString());
+                viewWeb.setVisibility(View.GONE);
                 JSONObject jsonObj;
                 try {
                     jsonObj = new JSONObject(String.valueOf(obj));
@@ -273,7 +302,7 @@ public class SearchResult extends AppCompatActivity {
                         doj=ft.format(src);
                         Log.e("doj",doj);
                         tDetail=new HashMap<String,String>();
-                        tDetail.put("content", source+"->"+destination);
+                        tDetail.put("content", source+" to "+destination);
                         tDetail.put("time", doj);
                         tDetail.put("travel_id",travel_id);
                         tDetail.put("name",name);
@@ -286,6 +315,7 @@ public class SearchResult extends AppCompatActivity {
                     Log.e("m here","123");
                     populateListview();
                 } catch (JSONException e) {
+                    noOne.setVisibility(View.VISIBLE);
                     e.printStackTrace();
                     Log.e("exception",e.getMessage().toString());
                 }catch (ParseException e) {

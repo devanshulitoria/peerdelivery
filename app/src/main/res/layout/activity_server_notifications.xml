@@ -3,12 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="@android:color/black">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@android:color/holo_green_dark"
         android:layout_marginBottom="5dp">
 
         <Button
@@ -41,13 +41,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="There are no new notifications"
+            android:layout_gravity="center_horizontal"
+            android:textSize="25sp"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            android:id="@+id/tv_no_noti_message"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listViewServerNotification"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
+        android:drawSelectorOnTop="true"
         android:background="@android:color/transparent"/>
         </LinearLayout>
+    <WebView
+        android:id="@+id/myWebView"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="50dp"/>
 
 </LinearLayout>
